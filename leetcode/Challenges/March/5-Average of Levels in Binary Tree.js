@@ -19,17 +19,17 @@ function TreeNode(val, left, right) {
  */
 // This Solution Using For Traverse Each Node in Binrary Tree and Put it Into Array
 // It Useful if you want to Traverse Each Node But Our SOlution is to Traver Each Level !!!!!!
-// var averageOfLevels = function (root) {
-//   const walk = (node, result) => {
-//     if(node === null) return result;
-//     result.push(node.val)
-//     walk(node.left, result)
-//     walk(node.right, result)
-//     return result
-//   }
+var averageOfLevels = function (root) {
+  const walk = (node, result) => {
+    if(node === null) return result;
+    result.push(node.val)
+    walk(node.left, result)
+    walk(node.right, result)
+    return result
+  }
 
-//   return walk(root, [])
-// };
+  return walk(root, [])
+};
 
 // This Code is the Best Solution if you want to Traverse Binary Tree With Each Level
 var averageOfLevels = function (root) {
