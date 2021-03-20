@@ -14,16 +14,16 @@
 var canVisitAllRooms = function (rooms) {
   const visitedRooms = new Set();
   visitedRooms.add(0);
-  const keysStack = [0];
-  while (keysStack.length !== 0) {
-    const keys = rooms[keysStack.pop()];
+  const keyStack = [0];
+  while (keyStack.length !== 0) {
+    const keys = rooms[keyStack.pop()];
     for (const key of keys)
       if (!visitedRooms.has(key)) {
         visitedRooms.add(key);
-        keysStack.push(key);
+        keyStack.push(key);
       }
   }
-  return visitedRooms.size === rooms.length;
+  return rooms.length === visitedRooms.size;
 };
 
 console.log(canVisitAllRooms([[1], [2], [3], []]));
