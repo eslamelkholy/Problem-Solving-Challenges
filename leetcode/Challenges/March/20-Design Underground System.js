@@ -21,7 +21,6 @@ class UndergroundSystem {
 
   getAverageTime(startStation, endStation) {
     const { count, sum } = this.timeBetweenStations[startStation + endStation];
-    console.log(sum / count);
     return sum / count;
   }
 }
