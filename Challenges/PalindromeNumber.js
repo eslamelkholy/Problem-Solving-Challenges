@@ -30,4 +30,4 @@ module.exports = {
   isPalindromeString,
 };
 
-console.log(isPalindromeString("ele"));
+console.log(isPalindromeString('ab'));
