@@ -37,10 +37,6 @@ var isPalindrome = function (head) {
   //   reverse list from slow -> null
   //   compare each element in original list and reversed list
 
-  if (!head) {
-    return null;
-  }
-
   let slow = head;
   let fast = head;
 
@@ -65,10 +61,6 @@ var isPalindrome = function (head) {
 };
 
 const reverse = (head) => {
-  if (!head) {
-    return null;
-  }
-
   let previous = null;
   let current = head;
 
