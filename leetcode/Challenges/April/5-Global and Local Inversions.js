@@ -11,5 +11,12 @@ var isIdealPermutation = function (A) {
   return globalInversions === localInversions;
 };
 
+var isIdealPermutation = function (A) {
+  for (var i = 0; i < A.length; i++) {
+    if (A[i] - i > 1 || A[i] - i < -1) return false;
+  }
+  return true;
+};
+
 console.log(isIdealPermutation([1, 0, 2]));
 console.log(isIdealPermutation([1, 2, 0]));
