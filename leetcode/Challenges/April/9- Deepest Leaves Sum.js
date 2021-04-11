@@ -12,14 +12,14 @@
  */
 var deepestLeavesSum = function (root) {
   const result = {};
+  let maxLevel = 0;
   const walk = (node, level) => {
     level++;
+    if (level > maxLevel) maxLevel = level;
     if (node.left) walk(node.left, level);
     if (node.right) walk(node.right, level);
-    if (!node.left && !node.right)
-      result[level] ? (result[level] = [...result[level], node.val]) : (result[level] = [node.val]);
+    result[level] ? (result[level] = [...result[level], node.val]) : (result[level] = [node.val]);
   };
   walk(root, 0);
-  const levelsValues = Object.values(result);
-  return levelsValues[levelsValues.length - 1].reduce((a, b) => a + b, 0);
+  return result[maxLevel].reduce((a, b) => a + b, 0);
 };
