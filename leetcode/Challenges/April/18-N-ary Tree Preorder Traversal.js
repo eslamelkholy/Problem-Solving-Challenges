@@ -15,7 +15,6 @@ var preorder = function (root) {
   if (!root) return result;
   const walk = (node) => {
     result.push(node.val);
-    if (node.children.length === 0) return;
     for (const childNode of node.children) walk(childNode);
   };
   walk(root);
