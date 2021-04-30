@@ -12,3 +12,6 @@ var searchRange = function(nums, target) {
     }
   return result
 };
+
+
+var searchRange = (nums, target)=> [nums.indexOf(target), nums.lastIndexOf(target)] || [-1, -1]; 
