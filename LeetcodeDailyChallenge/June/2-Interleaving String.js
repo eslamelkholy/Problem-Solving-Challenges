@@ -14,14 +14,12 @@ var isInterleave = function (s1, s2, s3) {
 
   for (let j = 1; j <= n; j++) dp[0][j] = s3[j - 1] == s2[j - 1] && dp[0][j - 1];
 
-  for (let i = 1; i <= m; i++) {
+  for (let i = 1; i <= m; i++)
     for (let j = 1; j <= n; j++) {
       const t1 = s3[i + j - 1] == s1[i - 1] && dp[i - 1][j];
       const t2 = s3[i + j - 1] == s2[j - 1] && dp[i][j - 1];
       dp[i][j] = t1 || t2;
     }
-  }
-
   return dp[m][n];
 };
 console.log(isInterleave('aabcc', 'dbbca', 'aadbbcbcac'));
