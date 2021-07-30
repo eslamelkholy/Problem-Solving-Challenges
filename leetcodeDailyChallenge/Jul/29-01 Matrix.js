@@ -5,46 +5,38 @@
 var updateMatrix = function (mat) {
   let result = new Array(mat.length).fill(0).map(() => new Array(mat[0].length).fill(0));
   const graph = {};
-  const graphValues = {};
-  let count = 0;
   for (let i = 0; i < mat.length; i++) {
     const colLen = mat[i].length;
     for (let j = 0; j < colLen; j++) {
       const nearestNodes = [];
-      const currentNode = j + 1 + count;
+      const currentNode = j + 1 + (colLen * i + 1);
       if (j - 1 >= 0) nearestNodes.push(currentNode - 1); // left
       if (j + 1 < colLen) nearestNodes.push(currentNode + 1); // right
       if (i + 1 < mat.length) nearestNodes.push(currentNode + colLen); // top
       if (i - 1 >= 0) nearestNodes.push(currentNode - colLen); // down
-      graph[currentNode] = nearestNodes;
-      graphValues[currentNode] = { value: mat[i][j], row: i, col: j };
+      graph[currentNode] = { nearest: nearestNodes, value: mat[i][j], row: i, col: j };
     }
-    count += colLen;
   }
-  for (const key in graph) {
-    if (graphValues[key]['value'] === 0) continue;
-    result[graphValues[key]['row']][graphValues[key]['col']] = BFS(key, graph, graphValues);
-  }
+  for (const key in graph) result[graph[key]['row']][graph[key]['col']] = BFS(key, graph);
+
   return result;
 };
-
-const BFS = (baseName, graph, graphValues) => {
-  let search_queue = [...graph[baseName]];
+const BFS = (baseName, graph) => {
+  if (graph[baseName]['value'] === 0) return 0;
+  let search_queue = [...graph[baseName]['nearest']];
   const searched = [];
   while (search_queue.length > 0) {
     const nodeKey = search_queue.shift();
     if (searched.includes(nodeKey)) continue;
-
-    if (graphValues[nodeKey]['value'] === 0)
+    if (graph[nodeKey]['value'] === 0)
       return (
-        Math.abs(graphValues[nodeKey]['row'] - graphValues[baseName]['row']) +
-        Math.abs(graphValues[nodeKey]['col'] - Math.abs(graphValues[baseName]['col']))
+        Math.abs(graph[nodeKey]['row'] - graph[baseName]['row']) +
+        Math.abs(graph[nodeKey]['col'] - Math.abs(graph[baseName]['col']))
       ); // Return Distance Between baseName and nodeKe
 
-    search_queue = [...search_queue, ...graph[nodeKey]];
+    search_queue = [...search_queue, ...graph[nodeKey]['nearest']];
     searched.push(nodeKey);
   }
-  return -1;
 };
 
 console.log(
