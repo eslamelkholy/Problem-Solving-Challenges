@@ -4,6 +4,7 @@
  */
 var subsetsWithDup = function (nums) {
   var subSet = [];
+  nums.sort((a, b) => a - b);
 
   dfs(nums, subSet);
 
