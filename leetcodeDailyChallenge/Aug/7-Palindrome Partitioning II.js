@@ -30,6 +30,35 @@ var minCut = function (s) {
   return cut[n - 1];
 };
 
+var minCut = function (s) {
+  let allPossiblePalindrom = [];
+  let min = s.length;
+  function findAllPalindrom(s, temp) {
+    if (s.length == 0) {
+      allPossiblePalindrom.push([...temp]);
+      if (temp.length < min) min = temp.length;
+      return;
+    }
+    for (let i = 0; i < s.length; i++) {
+      let leftSubString = s.slice(0, i + 1);
+
+      if (isPalindrom(leftSubString)) {
+        temp.push(leftSubString);
+        findAllPalindrom(s.slice(i + 1), [...temp]); // Right SubString
+        temp.pop();
+      }
+    }
+  }
+  findAllPalindrom(s, []);
+
+  return min - 1;
+};
+
+const isPalindrom = (str) => {
+  for (let i = 0; i < str.length; i++) if (str[i] !== str[str.length - 1 - i]) return false;
+  return true;
+};
+
 console.log(minCut('aab'));
 // console.log(minCut('ab'));
 // console.log(minCut('bb'));
