@@ -41,10 +41,11 @@ var minCut = function (s) {
     }
     for (let i = 0; i < s.length; i++) {
       let leftSubString = s.slice(0, i + 1);
-
+      console.log(leftSubString);
       if (isPalindrom(leftSubString)) {
         temp.push(leftSubString);
         findAllPalindrom(s.slice(i + 1), [...temp]); // Right SubString
+        console.log(s.slice(i + 1));
         temp.pop();
       }
     }
@@ -59,6 +60,7 @@ const isPalindrom = (str) => {
   return true;
 };
 
-console.log(minCut('aab'));
+// console.log(minCut('aab'));
 // console.log(minCut('ab'));
 // console.log(minCut('bb'));
+console.log(minCut('ababababababababababababcbabababababababababababa'));
