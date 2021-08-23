@@ -4,27 +4,23 @@
  * @return {boolean}
  */
 var isIsomorphic = function (s, t) {
-  const mapa = new Map();
-  const mapb = new Map();
-
-  for (let i = 0; i < s.length; i++) {
-    if (mapa.has(s[i])) {
-      if (mapa.get(s[i]) !== t[i]) {
-        return false;
-      }
-    } else {
-      mapa.set(s[i], t[i]);
+  var sDict = new Map();
+  var tDict = new Map();
+  for (var i = 0; i < s.length; i++) {
+    var sc = s[i];
+    var tc = t[i];
+    // If both dictionaries do not have their respective characters mapped yet,
+    // then we should set them
+    if (!sDict.has(sc) && !tDict.has(tc)) {
+      sDict.set(sc, tc);
+      tDict.set(tc, sc);
     }
 
-    if (mapb.has(t[i])) {
-      if (mapb.get(t[i]) !== s[i]) {
-        return false;
-      }
-    } else {
-      mapb.set(t[i], s[i]);
+    // If either char does not match then it is not isomorphic
+    if (sDict.get(sc) !== tc || tDict.get(tc) !== sc) {
+      return false;
     }
   }
-
   return true;
 };
 
