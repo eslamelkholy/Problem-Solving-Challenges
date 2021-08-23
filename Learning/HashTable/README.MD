@@ -10,3 +10,11 @@ The typical design of built-in hash table is:
 - Each bucket contains an array to store all the values in the same bucket initially.
   If there are too many values in the same bucket, these values will be maintained in a height-balanced binary search tree instead.
 - The average time complexity of both insertion and search is still O(1). And the time complexity in the worst case is O(logN) for both insertion and search by using height-balanced BST. It is a trade-off between insertion and search.
+
+#### Isomorphic String Solution Explaination
+
+we need to cover some criteria like
+
+- We can map a character only to itself or to one other character.
+- No two character should map to same character.
+- Replacing each character in string s with the character it is mapped to results in string t.
