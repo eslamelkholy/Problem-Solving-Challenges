@@ -18,3 +18,9 @@ we need to cover some criteria like
 - We can map a character only to itself or to one other character.
 - No two character should map to same character.
 - Replacing each character in string s with the character it is mapped to results in string t.
+
+### Usage
+
+- Used to Store Key/Value Pairs
+- Provide more information Like (Two Sum Problems)
+- aggregate all the information by key

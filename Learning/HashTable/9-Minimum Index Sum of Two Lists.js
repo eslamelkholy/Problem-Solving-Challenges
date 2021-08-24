@@ -10,17 +10,15 @@ var findRestaurant = function (list1, list2) {
   let result;
   for (let i = 0; i < list1.length; i++) list1Map.set(list1[i], i);
 
-  for (let i = 0; i < list2.length; i++) {
-    if (list1Map.has(list2[i])) {
-      commonMap.set(list2[i], list1Map.get(list2[i]) + i);
-    }
-  }
-  for (const [val, sumIndex] of commonMap) {
+  for (let i = 0; i < list2.length; i++)
+    if (list1Map.has(list2[i])) commonMap.set(list2[i], list1Map.get(list2[i]) + i);
+
+  for (const [val, sumIndex] of commonMap)
     if (sumIndex < leastIndex) {
       result = val;
       leastIndex = sumIndex;
     }
-  }
+
   const commonMapValues = [...commonMap.values()];
   if (commonMapValues.length > 1 && commonMapValues.every((val, i, arr) => val === arr[0]))
     return [...commonMap.keys()];
