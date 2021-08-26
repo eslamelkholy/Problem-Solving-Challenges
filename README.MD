@@ -1,8 +1,8 @@
 # Problem Solving In My Room
 
-## This Repo Related to Problem Solving Challenges And Learning Study Cases
+### This Repo Related to Problem Solving Challenges And Learning Study Cases
 
-# Hash Table Study Cases At Leetcode [Hash Table]
+#@ Hash Table Study Cases At Leetcode [Hash Table]
 
 https://leetcode.com/explore/learn/card/hash-table/182/practical-applications/
 
@@ -339,5 +339,46 @@ var numJewelsInStones = function (jewels, stones) {
   for (const jewel of jewels) jewelsSet.add(jewel);
   for (const stone of stones) if (jewelsSet.has(stone)) count++;
   return count;
+};
+```
+
+##### Longest Substring Without Repeating Characters
+
+https://leetcode.com/explore/learn/card/hash-table/187/conclusion-hash-table/1135/
+
+```javascript
+var lengthOfLongestSubstring = function (s) {
+  const subStrMap = {};
+  let result = 0;
+  for (let i = 0; i < s.length; i++) {
+    let currentSub = s[i];
+    for (let j = i + 1; j < s.length; j++) currentSub.includes(s[j]) ? (j = s.length) : (currentSub += s[j]);
+
+    subStrMap[currentSub] = currentSub.length;
+    if (currentSub.length > result) result = currentSub.length;
+    currentSub = '';
+  }
+
+  return result;
+};
+```
+
+##### Top K Frequent Elements
+
+https://leetcode.com/explore/learn/card/hash-table/187/conclusion-hash-table/1133/
+
+```javascript
+var topKFrequent = function (nums, k) {
+  const numsMap = {};
+  const result = [];
+  const freqArr = [];
+  for (const num of nums) numsMap[num] ? numsMap[num]++ : (numsMap[num] = 1);
+
+  for (const key in numsMap) freqArr.push({ freq: numsMap[key], val: key });
+
+  freqArr.sort((a, b) => b.freq - a.freq);
+  for (let i = 1; i < k + 1; i++) result.push(parseInt(freqArr[i - 1].val));
+
+  return result;
 };
 ```
