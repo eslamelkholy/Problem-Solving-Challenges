@@ -3,15 +3,6 @@
  * @param {number} k
  * @return {number[]}
  */
-function compare(a, b) {
-  if (a.freq < b.freq) {
-    return 1;
-  }
-  if (a.freq > b.freq) {
-    return -1;
-  }
-  return 0;
-}
 var topKFrequent = function (nums, k) {
   const numsMap = {};
   const result = [];
