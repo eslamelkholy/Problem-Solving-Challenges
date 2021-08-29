@@ -55,3 +55,21 @@ var inorderTraversal = function (root) {
   return result;
 };
 ```
+
+##### Binary Tree Postorder Traversal
+
+https://leetcode.com/explore/learn/card/data-structure-tree/134/traverse-a-tree/930/
+
+```javascript
+var postorderTraversal = function (root) {
+  const result = [];
+  const postOrderTraversal = (root) => {
+    if (!root) return;
+    postOrderTraversal(root.left);
+    postOrderTraversal(root.right);
+    result.push(root.val);
+  };
+  postOrderTraversal(root);
+  return result;
+};
+```
