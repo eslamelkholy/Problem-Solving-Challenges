@@ -10,3 +10,30 @@ The goal of this chapter is to:
 - Be able to solve preorder, inorder and postorder traversal recursively;
 - Be able to solve preorder, inorder and postorder traversal iteratively;
 - Be able to do level traversal using BFS.
+
+### Traverse a Tree - Introduction
+
+- Pre-order Traversal (Root >> Left >> Right)
+- In-order Traversal (Left >> Root >> Right)
+- Post-order Traversal (Left >> Right >> Root)
+- Recursive or Iterative (practice the three different traversal methods)
+
+### Practical Examplea
+
+##### Binary Tree Preorder Traversal
+
+https://leetcode.com/explore/learn/card/data-structure-tree/134/traverse-a-tree/928/
+
+```javascript
+var preorderTraversal = function (root) {
+  const result = [];
+  const preorder = (root) => {
+    if (!root) return;
+    result.push(root.val);
+    preorder(root.left);
+    preorder(root.right);
+  };
+  preorder(root);
+  return result;
+};
+```
