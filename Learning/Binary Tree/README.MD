@@ -37,3 +37,21 @@ var preorderTraversal = function (root) {
   return result;
 };
 ```
+
+##### Binary Tree Preorder Traversal
+
+https://leetcode.com/explore/learn/card/data-structure-tree/134/traverse-a-tree/929/
+
+```javascript
+var inorderTraversal = function (root) {
+  const result = [];
+  const binaryTreeTraverse = (root) => {
+    if (!root) return;
+    binaryTreeTraverse(root.left);
+    result.push(root.val);
+    binaryTreeTraverse(root.right);
+  };
+  binaryTreeTraverse(root);
+  return result;
+};
+```
