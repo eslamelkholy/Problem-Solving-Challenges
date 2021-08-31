@@ -173,3 +173,33 @@ var levelOrder = function (root) {
   return result;
 };
 ```
+
+#### Level-order Traversal - Top-Down Solution
+
+```javascript
+var maxDepth = function (root) {
+  if (!root) return 0;
+  let maxDepthAns = 1;
+  const findMaxDepth = (root, depth) => {
+    if (!root) return;
+    if (!root.left && !root.right) maxDepthAns = Math.max(maxDepthAns, depth);
+    findMaxDepth(root.left, depth + 1);
+    findMaxDepth(root.right, depth + 1);
+  };
+  findMaxDepth(root, maxDepthAns);
+  return maxDepthAns;
+};
+```
+
+#### Level-Order Traversal - Bottom-up Solution
+
+```javascript
+var maxDepth = function (root) {
+  if (!root) return 0;
+
+  const left_depth_ans = maxDepth(root.left);
+  const right_depth_ans = maxDepth(root.right);
+
+  return Math.max(left_depth_ans, right_depth_ans) + 1;
+};
+```
