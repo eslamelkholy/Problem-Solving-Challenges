@@ -203,3 +203,19 @@ var maxDepth = function (root) {
   return Math.max(left_depth_ans, right_depth_ans) + 1;
 };
 ```
+
+#### Symmetric Tree
+
+```javascript
+var isSymmetric = function (root) {
+  if (!root) return true;
+  const traverseTree = (left, right) => {
+    if (!left && !right) return true;
+    if (!left || !right) return false;
+
+    return left.val === right.val && traverseTree(left.right, right.left) && traverseTree(left.left, right.right);
+  };
+
+  return traverseTree(root.left, root.right);
+};
+```
