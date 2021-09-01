@@ -219,3 +219,22 @@ var isSymmetric = function (root) {
   return traverseTree(root.left, root.right);
 };
 ```
+
+#### Path Sum - Binary Tree
+
+```javascript
+var hasPathSum = function (root, targetSum) {
+  let hasPath = false;
+  const traverseTree = (root, prevValue = 0) => {
+    if (!root) return;
+
+    prevValue += root.val;
+    if (!root.left && !root.right && prevValue === targetSum) hasPath = true;
+    traverseTree(root.left, prevValue);
+    traverseTree(root.right, prevValue);
+  };
+
+  traverseTree(root);
+  return hasPath;
+};
+```
