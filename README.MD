@@ -203,7 +203,8 @@ https://leetcode.com/explore/learn/card/hash-table/184/comparison-with-other-dat
 ```javascript
 var firstUniqChar = function (s) {
   const strMap = {};
-  for (let i = 0; i < s.length; i++) strMap[s[i]] ? strMap[s[i]]['count']++ : (strMap[s[i]] = { count: 1, index: i });
+  for (let i = 0; i < s.length; i++)
+    strMap[s[i]] ? strMap[s[i]]['count']++ : (strMap[s[i]] = { count: 1, index: i });
 
   for (const char in strMap) if (strMap[char]['count'] === 1) return strMap[char]['index'];
 
@@ -622,5 +623,40 @@ var maxDepth = function (root) {
   const right_depth_ans = maxDepth(root.right);
 
   return Math.max(left_depth_ans, right_depth_ans) + 1;
+};
+```
+
+#### Sum of Left Leaves Solution
+
+https://leetcode.com/problems/sum-of-left-leaves/
+
+```javascript
+var maxDepth = function (root) {
+  if (!root) return 0;
+
+  const left_depth_ans = maxDepth(root.left);
+  const right_depth_ans = maxDepth(root.right);
+
+  return Math.max(left_depth_ans, right_depth_ans) + 1;
+};
+```
+
+#### Sum Root to Leaf Numbers Solution
+
+https://leetcode.com/problems/sum-of-left-leaves/
+
+```javascript
+var sumNumbers = function (root) {
+  let sum = 0;
+  const dfs = (root, previousVal) => {
+    if (!root) return 0;
+
+    if (!root.left && !root.right) sum += parseInt(previousVal + root.val + '');
+
+    dfs(root.left, previousVal + root.val + '');
+    dfs(root.right, previousVal + root.val + '');
+  };
+  dfs(root, sum);
+  return sum;
 };
 ```
