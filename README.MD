@@ -8,6 +8,7 @@
 
 - [Hash Table](#hash-table)
 - [Binary Tree](#binary-tree)
+- [Daily Challenge](#daily-challenge)
 <!--te-->
 
 # Hash Table
@@ -658,5 +659,22 @@ var sumNumbers = function (root) {
   };
   dfs(root, sum);
   return sum;
+};
+```
+
+# Daily Challenge
+
+#### Arranging Coins
+
+https://leetcode.com/problems/arranging-coins/
+
+```javascript
+var arrangeCoins = function (n) {
+  let currentRow = 0;
+  for (let i = 0; i < n; i++) {
+    currentRow++;
+    n -= currentRow;
+  }
+  return currentRow;
 };
 ```
