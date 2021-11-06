@@ -678,3 +678,20 @@ var arrangeCoins = function (n) {
   return currentRow;
 };
 ```
+
+#### Single Number III
+
+https://leetcode.com/problems/single-number-iii/
+
+```javascript
+var singleNumber = function (nums) {
+  const numMap = {};
+  const result = [];
+
+  for (const num of nums) numMap[num] ? numMap[num]++ : (numMap[num] = 1);
+
+  for (const numKey in numMap) if (numMap[numKey] === 1) result.push(parseInt(numKey));
+
+  return result;
+};
+```
