@@ -682,17 +682,17 @@ There are many types of “graphs”. In this Explore Card, we will introduce th
 #### Undirected Graphs
 
 The edges between any two vertices in an “undirected graph” do not have a direction, indicating a two-way relationship.
-![Undirected graphs](7-public/Undirectedgraphs.png)
+![Undirected graphs](public/Undirectedgraphs.png)
 
 #### Directed Graphs
 
 The edges between any two vertices in a “directed graph” graph are directional.
-![Directed graph](7-public/Directedgraph.png)
+![Directed graph](public/Directedgraph.png)
 
 #### Weighted Graphs
 
 Each edge in a “weighted graph” has an associated weight. The weight can be of any metric, such as time, distance, size, etc. The most commonly seen “weighted map” in our daily life might be a city map. In Figure 3, each edge is marked with the distance, which can be regarded as the weight of that edge.
-![Weighted graphs](7-public/Weightedgraphs.png)
+![Weighted graphs](public/Weightedgraphs.png)
 
 ### The Definition of “graph” and Terminologies
 
