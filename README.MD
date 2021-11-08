@@ -663,6 +663,24 @@ var sumNumbers = function (root) {
 };
 ```
 
+#### Unique Binary Search Trees - Javascript
+
+https://leetcode.com/problems/unique-binary-search-trees
+
+```javascript
+var numTrees = function (n) {
+  const dp = new Array(n + 1).fill(0);
+  dp[1] = dp[0] = 1;
+
+  for (let i = 2; i <= n; ++i) {
+    for (let j = 0; j < i; ++j) {
+      dp[i] += dp[j] * dp[i - 1 - j];
+    }
+  }
+  return dp[n];
+};
+```
+
 # Graphs
 
 Graph is probably the data structure that has the closest resemblance to our daily life. There are many types of graphs describing the relationships in real life. For instance, our friend circle is a huge “graph”.
