@@ -776,3 +776,21 @@ var maxProfit = function (prices) {
   return maxVal;
 };
 ```
+
+#### Minimum Value to Get Positive Step by Step Sum
+
+https://leetcode.com/problems/minimum-value-to-get-positive-step-by-step-sum
+
+```javascript
+var minStartValue = function (nums) {
+  let initVal = 1;
+  let sum = 0;
+  for (const num of nums) {
+    sum += num;
+
+    initVal = Math.max(1 - sum, initVal);
+  }
+
+  return initVal;
+};
+```
