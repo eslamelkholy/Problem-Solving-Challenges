@@ -1,15 +1,10 @@
-/**
- * Definition for singly-linked list.
- * function ListNode(val, next) {
- *     this.val = (val===undefined ? 0 : val)
- *     this.next = (next===undefined ? null : next)
- * }
- */
-/**
- * @param {ListNode} head
- * @param {number} val
- * @return {ListNode}
- */
+# Linked List
+
+#### Remove Linked List Elements
+
+https://leetcode.com/problems/remove-linked-list-elements/
+
+```javascript
 var removeElements = function (head, val) {
   if (!head) return head;
   let dummyLinkedList = head;
@@ -28,3 +23,4 @@ var removeElements = function (head, val) {
 
   return clonedLinkedList;
 };
+```

@@ -9,6 +9,7 @@
 - [Hash Table](#hash-table)
 - [Binary Tree](#binary-tree)
 - [Graphs](#graphs)
+- [Linked List](#linked-list)
 - [Daily Challenge](#daily-challenge)
 <!--te-->
 
@@ -726,6 +727,33 @@ Each edge in a “weighted graph” has an associated weight. The weight can be 
 - Degree of a Vertex: the term “degree” applies to unweighted graphs. The degree of a vertex is the number of edges connecting the vertex. In Figure 1, the degree of vertex A is 3 because three edges are connecting it.
 - In-Degree: “in-degree” is a concept in directed graphs. If the in-degree of a vertex is d, there are d directional edges incident to the vertex. In Figure 2, A’s indegree is 1, i.e., the edge from F to A.
 - Out-Degree: “out-degree” is a concept in directed graphs. If the out-degree of a vertex is d, there are d edges incident from the vertex. In Figure 2, A’s outdegree is 3, i,e, the edges A to B, A to C, and A to G.
+
+# Linked List
+
+#### Remove Linked List Elements
+
+https://leetcode.com/problems/remove-linked-list-elements/
+
+```javascript
+var removeElements = function (head, val) {
+  if (!head) return head;
+  let dummyLinkedList = head;
+  let clonedLinkedList = dummyLinkedList;
+
+  while (head) {
+    if (head.next && head.next.val === val) head.next = head.next.next;
+
+    head = head.next;
+    if (!head || head.val !== val) {
+      dummyLinkedList.next = head;
+      dummyLinkedList = dummyLinkedList.next;
+    }
+  }
+  if (clonedLinkedList.val === val) clonedLinkedList = clonedLinkedList.next;
+
+  return clonedLinkedList;
+};
+```
 
 # Daily Challenge
 
