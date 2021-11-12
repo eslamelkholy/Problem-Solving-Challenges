@@ -6,21 +6,18 @@ https://leetcode.com/problems/remove-linked-list-elements/
 
 ```javascript
 var removeElements = function (head, val) {
-  if (!head) return head;
-  let dummyLinkedList = head;
-  let clonedLinkedList = dummyLinkedList;
+  let startedLinkedList = new ListNode(0, head);
+  let prev = startedLinkedList;
+  let curr = head;
 
-  while (head) {
-    if (head.next && head.next.val === val) head.next = head.next.next;
-
-    head = head.next;
-    if (!head || head.val !== val) {
-      dummyLinkedList.next = head;
-      dummyLinkedList = dummyLinkedList.next;
+  while (curr) {
+    if (curr.val === val) {
+      prev.next = curr.next;
+    } else {
+      prev = curr;
     }
+    curr = curr.next;
   }
-  if (clonedLinkedList.val === val) clonedLinkedList = clonedLinkedList.next;
-
-  return clonedLinkedList;
+  return startedLinkedList.next;
 };
 ```
