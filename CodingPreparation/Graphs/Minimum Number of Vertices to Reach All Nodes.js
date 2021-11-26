@@ -7,7 +7,7 @@ var findSmallestSetOfVertices = function (n, edges) {
   const reacableNodes = new Set();
   const unReachableNodes = [];
 
-  for (const edge of edges) reacableNodes.add(edge[1]);
+  for (const [_, nodeVal] of edges) reacableNodes.add(nodeVal);
 
   for (let i = 0; i < n; i++) {
     if (!reacableNodes.has(i)) unReachableNodes.push(i);
