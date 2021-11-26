@@ -1,4 +1,4 @@
-var levelOrder = function (root) {
+var levelOrderBFS = function (root) {
   if (!root) return [];
   const queue = [root];
   const result = [];
