@@ -10,24 +10,23 @@ const isOurTarget = (name, target) => name === target;
 
 const traverseGrahpBFS = (startPoint, target) => {
   let searchQueue = [...graph[startPoint]];
-  let searched = [];
+  const searched = [];
 
   while (searchQueue.length > 0) {
-    const person = searchQueue.shift(); // Return First Element of Graph
-    if (searched.includes(person)) continue;
+    const node = searchQueue.shift();
+    if (searched.includes(node)) continue;
 
-    if (isOurTarget(person, target)) {
-      console.log(`Our Target has been Target Name = ${target}`);
-      return true;
+    if (isOurTarget(target, node)) {
+      return console.log('Our Target Has Been Founded = ', node);
     }
-
-    if (graph[person]) searchQueue = [...searchQueue, ...graph[person]];
-    searched.push(person);
+    searched.push(node);
+    if (graph[node]) searchQueue = [...searchQueue, ...graph[node]];
   }
+
   return false;
 };
 
-console.log(traverseGrahpBFS('you', 'thom'));
+console.log(traverseGrahpBFS('you', 'claire'));
 
 /**
  * So Here we Can Express The Running Time as O(number of People + number Of Edges)
