@@ -4,10 +4,13 @@
  */
 var numPairsDivisibleBy60 = function (time) {
   let result = 0;
+  const numMap = {};
 
-  for (let i = 0; i < time.length; i++)
-    for (let j = i + 1; j < time.length; j++) if ((time[i] + time[j]) % 60 == 0) result++;
+  for (let i = 0; i < time.length; i++) {
+    result += numMap[(60 - (time[i] % 60)) % 60] || 0;
 
+    numMap[time[i] % 60] = numMap[time[i] % 60] ? numMap[time[i] % 60] + 1 : 1;
+  }
   return result;
 };
 
