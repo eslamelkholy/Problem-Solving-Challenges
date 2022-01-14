@@ -213,7 +213,9 @@ var isSymmetric = function (root) {
     if (!left && !right) return true;
     if (!left || !right) return false;
 
-    return left.val === right.val && traverseTree(left.right, right.left) && traverseTree(left.left, right.right);
+    return (
+      left.val === right.val && traverseTree(left.right, right.left) && traverseTree(left.left, right.right)
+    );
   };
 
   return traverseTree(root.left, root.right);
@@ -236,5 +238,41 @@ var hasPathSum = function (root, targetSum) {
 
   traverseTree(root);
   return hasPath;
+};
+```
+
+#### Sum Root To Leaf Of Binary Search Tree
+
+```javascript
+var sumRootToLeaf = function (root) {
+  let sum = 0;
+  const dfs = (root, prev = '') => {
+    if (!root) return;
+    prev += root.val;
+
+    if (!root.left && !root.right) {
+      sum += parseInt(prev, 2);
+    }
+
+    dfs(root.left, prev);
+    dfs(root.right, prev);
+  };
+  dfs(root);
+  return sum;
+};
+```
+
+#### Insert into Binary Search Tree
+
+```javascript
+var insertIntoBST = function (root, val) {
+  if (!root) return new TreeNode(val);
+
+  if (root.val > val) {
+    root.left = insertIntoBST(root.left, val);
+  } else {
+    root.right = insertIntoBST(root.right, val);
+  }
+  return root;
 };
 ```
