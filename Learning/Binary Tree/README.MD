@@ -204,6 +204,59 @@ var maxDepth = function (root) {
 };
 ```
 
+#### Sum of Left Leaves Solution
+
+https://leetcode.com/problems/sum-of-left-leaves/
+
+```javascript
+var maxDepth = function (root) {
+  if (!root) return 0;
+
+  const left_depth_ans = maxDepth(root.left);
+  const right_depth_ans = maxDepth(root.right);
+
+  return Math.max(left_depth_ans, right_depth_ans) + 1;
+};
+```
+
+#### Sum Root to Leaf Numbers Solution
+
+https://leetcode.com/problems/sum-of-left-leaves/
+
+```javascript
+var sumNumbers = function (root) {
+  let sum = 0;
+  const dfs = (root, previousVal) => {
+    if (!root) return 0;
+
+    if (!root.left && !root.right) sum += parseInt(previousVal + root.val + '');
+
+    dfs(root.left, previousVal + root.val + '');
+    dfs(root.right, previousVal + root.val + '');
+  };
+  dfs(root, sum);
+  return sum;
+};
+```
+
+#### Unique Binary Search Trees - Javascript
+
+https://leetcode.com/problems/unique-binary-search-trees
+
+```javascript
+var numTrees = function (n) {
+  const dp = new Array(n + 1).fill(0);
+  dp[1] = dp[0] = 1;
+
+  for (let i = 2; i <= n; ++i) {
+    for (let j = 0; j < i; ++j) {
+      dp[i] += dp[j] * dp[i - 1 - j];
+    }
+  }
+  return dp[n];
+};
+```
+
 #### Symmetric Tree
 
 ```javascript

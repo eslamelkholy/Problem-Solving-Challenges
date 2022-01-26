@@ -618,8 +618,6 @@ var maxDepth = function (root) {
 
 #### Level-Order Traversal - Bottom-up Solution
 
-https://leetcode.com/explore/learn/card/data-structure-tree/17/solve-problems-recursively/535/
-
 ```javascript
 var maxDepth = function (root) {
   if (!root) return 0;
@@ -681,6 +679,79 @@ var numTrees = function (n) {
     }
   }
   return dp[n];
+};
+```
+
+#### Symmetric Tree
+
+```javascript
+var isSymmetric = function (root) {
+  if (!root) return true;
+  const traverseTree = (left, right) => {
+    if (!left && !right) return true;
+    if (!left || !right) return false;
+
+    return (
+      left.val === right.val && traverseTree(left.right, right.left) && traverseTree(left.left, right.right)
+    );
+  };
+
+  return traverseTree(root.left, root.right);
+};
+```
+
+#### Path Sum - Binary Tree
+
+```javascript
+var hasPathSum = function (root, targetSum) {
+  let hasPath = false;
+  const traverseTree = (root, prevValue = 0) => {
+    if (!root) return;
+
+    prevValue += root.val;
+    if (!root.left && !root.right && prevValue === targetSum) hasPath = true;
+    traverseTree(root.left, prevValue);
+    traverseTree(root.right, prevValue);
+  };
+
+  traverseTree(root);
+  return hasPath;
+};
+```
+
+#### Sum Root To Leaf Of Binary Search Tree
+
+```javascript
+var sumRootToLeaf = function (root) {
+  let sum = 0;
+  const dfs = (root, prev = '') => {
+    if (!root) return;
+    prev += root.val;
+
+    if (!root.left && !root.right) {
+      sum += parseInt(prev, 2);
+    }
+
+    dfs(root.left, prev);
+    dfs(root.right, prev);
+  };
+  dfs(root);
+  return sum;
+};
+```
+
+#### Insert into Binary Search Tree
+
+```javascript
+var insertIntoBST = function (root, val) {
+  if (!root) return new TreeNode(val);
+
+  if (root.val > val) {
+    root.left = insertIntoBST(root.left, val);
+  } else {
+    root.right = insertIntoBST(root.right, val);
+  }
+  return root;
 };
 ```
 
