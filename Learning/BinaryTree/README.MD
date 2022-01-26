@@ -329,3 +329,25 @@ var insertIntoBST = function (root, val) {
   return root;
 };
 ```
+
+#### All Elements in Two Binary Search Trees
+
+https://leetcode.com/problems/all-elements-in-two-binary-search-trees/
+
+```javascript
+var getAllElements = function (root1, root2) {
+  const results = [];
+  const traverseTree = (root) => {
+    if (!root) return;
+
+    results.push(root.val);
+
+    traverseTree(root.left);
+    traverseTree(root.right);
+  };
+
+  traverseTree(root1);
+  traverseTree(root2);
+  return results.sort((a, b) => a - b);
+};
+```
