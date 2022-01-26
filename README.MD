@@ -1,6 +1,11 @@
-# Problem Solving In My Room
+# Problem Solving Journey
 
-### This Repo Related to Problem Solving Challenges And Learning Study Cases
+in this repo you will find detailed explanation for everything related to problem solving <br>
+if you find a link with **Awesome Practical Examples You Can Find Only Here** don't miss this change to check what is inside it
+
+you will find a lot of examples well explained and well optimized
+
+enjoy your journey here
 
 # Table of contents
 
