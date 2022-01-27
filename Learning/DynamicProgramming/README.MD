@@ -187,3 +187,24 @@ var climbStairsBottomUp = function (n) {
 With DP problems, we can use logical thinking to find the answer to the original problem for certain inputs, in this case we reason that there is 1 way to climb to the first stair and 2 ways to climb to the second stair. We can then use a recurrence relation to find the answer to the original problem for any state, in this case for any stair number. Finding the recurrence relation involves thinking about how moving from one state to another changes the answer to the problem.
 
 This is the essence of dynamic programming. Here's a quick animation for Climbing Stairs:
+
+##### House Robber
+
+https://leetcode.com/problems/house-robber/
+
+```javascript
+var rob = function (nums) {
+  if (nums.length == 1) return nums[0];
+
+  const n = nums.length;
+  const dp = new Array(n).fill(0);
+  dp[0] = nums[0];
+  dp[1] = Math.max(nums[0], nums[1]);
+
+  for (let i = 2; i < n; i++) {
+    dp[i] = Math.max(dp[i - 1], nums[i] + dp[i - 2]);
+  }
+
+  return dp[n - 1];
+};
+```
