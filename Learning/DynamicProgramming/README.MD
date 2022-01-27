@@ -114,3 +114,76 @@ To summarize: if a problem is asking for the maximum/minimum/longest/shortest of
 **These two characteristics can be used to identify if a problem should be solved with DP**.
 
 > Note: these characteristics should only be used as guidelines - while they are extremely common in DP problems, at the end of the day DP is a very broad topic.
+
+### Framework for DP Problems
+
+Now that we understand the basics of DP and how to spot when DP is applicable to a problem, we've reached the most important part: actually solving the problem. In this section, we're going to talk about a framework for solving DP problems. This framework is applicable to nearly every DP problem and provides a clear step-by-step approach to developing DP algorithms.
+
+- A function or data structure that will compute/contain the answer to the problem for every given state.
+- A recurrence relation to transition between states.
+- Base cases, so that our recurrence relation doesn't go on infinitely.
+
+The equation \text{dp(i) = dp(i - 1) + dp(i - 2)}dp(i) = dp(i - 1) + dp(i - 2) on its known will continue forever to negative infinity. We need base cases so that the function will eventually return an actual number.
+
+#### Example Implementations
+
+```javascript
+var climbStairsNotMemoized = function (n) {
+  const dp = (stair) => {
+    if (stair <= 2) return stair; // Base cases
+    return dp(stair - 1) + dp(stair - 2); // Recurrence relation
+  };
+
+  return dp(n);
+};
+```
+
+Note this Solution is So Bad
+because we haven't Memoized Anything the Complexity O(2^n)
+because every call to dp creates 2 more calls to dp.
+If we wanted to find how many ways there are to climb to the 250th step,
+the number of operations we would have to do is approximately equal to the number of atoms in the universe.
+
+> In fact, without the memoization, this isn't actually dynamic programming - it's just basic recursion. Only after we optimize our solution by adding memoization to avoid repeated computations can it be called DP. As explained in chapter 1, memoization means caching results from function calls and then referring to those results in the future instead of recalculating them. This is usually done with a hashmap or an array.
+
+**Solution2 Using TOP-Down With Memoization**
+
+```javascript
+var climbStairsTopDown = function (n) {
+  const memo = {};
+  const dp = (stair) => {
+    if (stair <= 2) return stair; // Base cases
+
+    if (memo[stair]) return memo[stair];
+
+    memo[stair] = dp(stair - 1) + dp(stair - 2); // Caching Result if Not Exists
+    return memo[stair];
+  };
+
+  return dp(n);
+};
+```
+
+**With memoization, our time complexity drops to O(n) - astronomically better, literally.**
+
+**Solution3 Using Bottom Up**
+
+```javascript
+var climbStairsBottomUp = function (n) {
+  if (n === 1) return n;
+
+  const dp = new Array(n + 1).fill(0);
+  dp[1] = 1;
+  dp[2] = 2;
+  for (let i = 3; i < n + 1; i++) {
+    dp[i] = dp[i - 1] + dp[i - 2];
+  }
+  return dp[n];
+};
+```
+
+### Summarize
+
+With DP problems, we can use logical thinking to find the answer to the original problem for certain inputs, in this case we reason that there is 1 way to climb to the first stair and 2 ways to climb to the second stair. We can then use a recurrence relation to find the answer to the original problem for any state, in this case for any stair number. Finding the recurrence relation involves thinking about how moving from one state to another changes the answer to the problem.
+
+This is the essence of dynamic programming. Here's a quick animation for Climbing Stairs:

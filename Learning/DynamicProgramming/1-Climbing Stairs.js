@@ -2,7 +2,7 @@
  * @param {number} n
  * @return {number}
  */
-var climbStairs1 = function (n) {
+var climbStairsNotMemoized = function (n) {
   const dp = (stair) => {
     if (stair <= 2) return stair; // Base cases
     return dp(stair - 1) + dp(stair - 2); // Recurrence relation
