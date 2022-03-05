@@ -201,6 +201,8 @@ Each edge in a “weighted graph” has an associated weight. The weight can be 
 - In-Degree: “in-degree” is a concept in directed graphs. If the in-degree of a vertex is d, there are d directional edges incident to the vertex. In Figure 2, A’s indegree is 1, i.e., the edge from F to A.
 - Out-Degree: “out-degree” is a concept in directed graphs. If the out-degree of a vertex is d, there are d edges incident from the vertex. In Figure 2, A’s outdegree is 3, i,e, the edges A to B, A to C, and A to G.
 
+[Awesome Practical Examples You Can Find Only Here](Learning/Graph/README.MD)
+
 # Linked List
 
 ### Practical Examplea
