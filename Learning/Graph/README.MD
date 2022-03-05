@@ -43,3 +43,50 @@ Each edge in a “weighted graph” has an associated weight. The weight can be 
 - Degree of a Vertex: the term “degree” applies to unweighted graphs. The degree of a vertex is the number of edges connecting the vertex. In Figure 1, the degree of vertex A is 3 because three edges are connecting it.
 - In-Degree: “in-degree” is a concept in directed graphs. If the in-degree of a vertex is d, there are d directional edges incident to the vertex. In Figure 2, A’s indegree is 1, i.e., the edge from F to A.
 - Out-Degree: “out-degree” is a concept in directed graphs. If the out-degree of a vertex is d, there are d edges incident from the vertex. In Figure 2, A’s outdegree is 3, i,e, the edges A to B, A to C, and A to G.
+
+#### Traverse Graph
+
+1. Using DFS Recursive Solution
+
+```javascript
+const dfsPrint = (graph, sourceNode) => {
+  console.log(sourceNode);
+  for (const neighbor of graph[sourceNode]) {
+    dfsPrint(graph, neighbor);
+  }
+};
+```
+
+2. Using DFS With Stack
+
+```javascript
+const dfsPrint = (graph, sourceNode) => {
+  const stack = [sourceNode];
+
+  while (stack.length > 0) {
+    const current = stack.pop();
+    console.log(current);
+
+    for (const neighbor of graph[current]) {
+      stack.push(neighbor);
+    }
+  }
+};
+```
+
+3. Using BFS With Queue
+
+```javascript
+const bfs = (graph, sourceNode) => {
+  const queue = [sourceNode];
+
+  while (queue.length > 0) {
+    const current = queue.shift();
+    console.log(current);
+
+    for (const neighbor of graph[current]) {
+      queue.push(neighbor);
+    }
+  }
+};
+```
