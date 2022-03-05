@@ -90,3 +90,61 @@ const bfs = (graph, sourceNode) => {
   }
 };
 ```
+
+### Starting WITH GRAPH Problems
+
+- Has Path Problem Check if Graph Has Path From Source >>> Destination
+
+```javascript
+const hasPathDfsStack = (graph, src, dest) => {
+  const stack = [src];
+
+  while (stack.length > 0) {
+    const currentNode = stack.pop();
+    if (currentNode === dest) {
+      return true;
+    }
+
+    for (const neighbor of graph[currentNode]) {
+      stack.push(neighbor);
+    }
+  }
+
+  return false;
+};
+```
+
+```javascript
+const hasPathUsingBFS = (graph, src, dest) => {
+  const queue = [src];
+
+  while (queue.length > 0) {
+    const currentNode = queue.shift();
+
+    if (currentNode === dest) {
+      return true;
+    }
+
+    for (const neighbor of graph[currentNode]) {
+      queue.push(neighbor);
+    }
+  }
+
+  return false;
+};
+```
+
+```javascript
+const hasPath = (graph, src, dest) => {
+  if (src === dest) {
+    return true;
+  }
+
+  for (const neighbor of graph[src]) {
+    if (hasPath(graph, neighbor, dest) === true) {
+      return true;
+    }
+  }
+  return false;
+};
+```
