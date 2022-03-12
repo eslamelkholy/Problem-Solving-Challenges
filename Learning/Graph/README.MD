@@ -22,7 +22,7 @@ The edges between any two vertices in an “undirected graph” do not have a di
 #### Directed Graphs
 
 The edges between any two vertices in a “directed graph” graph are directional.
-![Directed graph](/public/Directedgraph.png)
+![Directed graph](/public/Directedgraphs.png)
 
 #### Weighted Graphs
 
