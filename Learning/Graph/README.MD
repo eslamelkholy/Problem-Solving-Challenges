@@ -148,3 +148,58 @@ const hasPath = (graph, src, dest) => {
   return false;
 };
 ```
+
+- Undirected Graph Hash Path Problem **Mark Visited**
+
+```javascript
+const undirectedPathUsingDFSRecursive = (edges, source, dest) => {
+  const graph = buildGraph(edges);
+  const visited = new Set();
+
+  return DFShasPath(graph, source, dest, visited);
+};
+
+const DFShasPath = (graph, src, dest, visited) => {
+  if (src === dest) return true;
+  if (visited.has(src)) return false;
+
+  visited.add(src);
+
+  for (const neighbor of graph[src]) {
+    if (DFShasPath(graph, neighbor, dest, visited)) {
+      return true;
+    }
+  }
+
+  return false;
+};
+```
+
+- Connected Component Problem
+
+```javascript
+const connectedComponentCount = (graph) => {
+  const visited = new Set();
+  let counter = 0;
+
+  for (const node in graph) {
+    if (dfs(graph, Number(node), visited)) {
+      counter++;
+    }
+  }
+
+  return counter;
+};
+
+const dfs = (graph, currentNode, visited) => {
+  if (visited.has(currentNode)) return false;
+
+  visited.add(currentNode);
+
+  for (const neighbor of graph[currentNode]) {
+    dfs(graph, neighbor, visited);
+  }
+
+  return true; // The Whole Explore Done
+};
+```
