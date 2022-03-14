@@ -4,11 +4,7 @@ const islandCount = (grid) => {
 
   for (let i = 0; i < grid.length; i++) {
     for (let j = 0; j < grid[i].length; j++) {
-      if (grid[i][j] === 'W' || visited.has(i + '-' + j)) {
-        continue;
-      }
-      dfs(grid, visited, i, j);
-      islandCounter++;
+      if (dfs(grid, visited, i, j)) islandCounter++;
     }
   }
 
@@ -16,15 +12,23 @@ const islandCount = (grid) => {
 };
 
 const dfs = (grid, visited, row, col) => {
-  if (grid[row] === undefined || grid[row][col] === undefined || grid[row][col] === 'W') return;
-  if (visited.has(row + '-' + col)) return;
+  const position = row + '-' + col;
+  if (
+    grid[row] === undefined ||
+    grid[row][col] === undefined ||
+    grid[row][col] === 'W' ||
+    visited.has(position)
+  )
+    return false;
 
-  visited.add(row + '-' + col);
+  visited.add(position);
 
   dfs(grid, visited, row + 1, col);
   dfs(grid, visited, row - 1, col);
   dfs(grid, visited, row, col + 1);
   dfs(grid, visited, row, col - 1);
+
+  return true;
 };
 
 const grid = [
