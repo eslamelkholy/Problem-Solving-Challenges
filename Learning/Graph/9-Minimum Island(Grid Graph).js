@@ -4,7 +4,7 @@ const minimumIsland = (grid) => {
 
   for (let i = 0; i < grid.length; i++) {
     for (let j = 0; j < grid[i].length; j++) {
-      const size = dfs(grid, visited, i, j);
+      const size = exploreSizeDfs(grid, visited, i, j);
       if (!size) continue;
 
       minimumIslandCounter = Math.min(minimumIslandCounter, size);
@@ -14,7 +14,7 @@ const minimumIsland = (grid) => {
   return minimumIslandCounter;
 };
 
-const dfs = (grid, visited, row, col) => {
+const exploreSizeDfs = (grid, visited, row, col) => {
   const position = row + '-' + col;
   if (grid[row] === undefined || grid[row][col] === undefined || grid[row][col] === 'W' || visited.has(position)) return false;
 
@@ -22,10 +22,10 @@ const dfs = (grid, visited, row, col) => {
 
   let size = 1;
 
-  size += dfs(grid, visited, row + 1, col);
-  size += dfs(grid, visited, row - 1, col);
-  size += dfs(grid, visited, row, col + 1);
-  size += dfs(grid, visited, row, col - 1);
+  size += exploreSizeDfs(grid, visited, row + 1, col);
+  size += exploreSizeDfs(grid, visited, row - 1, col);
+  size += exploreSizeDfs(grid, visited, row, col + 1);
+  size += exploreSizeDfs(grid, visited, row, col - 1);
 
   return size;
 };
