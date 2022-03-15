@@ -10,7 +10,6 @@
  * @param {TreeNode} root
  * @return {number}
  */
-// Top-Down Solution
 var maxDepth = function (root) {
   let maxDepthCounter = 0;
   const dfs = (root, maxVal) => {
@@ -25,15 +24,4 @@ var maxDepth = function (root) {
 
   dfs(root, maxDepthCounter);
   return maxDepthCounter;
-};
-
-// Bottom-Up Solution
-
-var maxDepth = function (root) {
-  if (!root) return 0;
-
-  const left_depth_ans = maxDepth(root.left);
-  const right_depth_ans = maxDepth(root.right);
-
-  return Math.max(left_depth_ans, right_depth_ans) + 1;
 };
