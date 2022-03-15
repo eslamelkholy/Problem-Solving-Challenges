@@ -82,4 +82,5 @@ var minDiffInBST = function (root, a = 3, b = 9) {
 // Use this Data Samples for test
 // https://leetcode.com/problems/minimum-distance-between-bst-nodes/
 
+// Solution but badass https://www.geeksforgeeks.org/shortest-distance-between-two-nodes-in-bst/
 // [5,2,12,1,3,9,21,null,null, null,null,null,null, 19,25]
