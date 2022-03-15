@@ -266,9 +266,7 @@ var isSymmetric = function (root) {
     if (!left && !right) return true;
     if (!left || !right) return false;
 
-    return (
-      left.val === right.val && traverseTree(left.right, right.left) && traverseTree(left.left, right.right)
-    );
+    return left.val === right.val && traverseTree(left.right, right.left) && traverseTree(left.left, right.right);
   };
 
   return traverseTree(root.left, root.right);
@@ -349,5 +347,67 @@ var getAllElements = function (root1, root2) {
   traverseTree(root1);
   traverseTree(root2);
   return results.sort((a, b) => a - b);
+};
+```
+
+#### Count Good Nodes Problem
+
+```javascript
+var goodNodes = function (root) {
+  let goodNodesCounter = 0;
+
+  const dfs = (root, val) => {
+    if (!root) return;
+
+    if (root.val >= val) {
+      goodNodesCounter++;
+    }
+
+    const maxVal = Math.max(root.val, val);
+    dfs(root.left, maxVal);
+    dfs(root.right, maxVal);
+  };
+
+  dfs(root, Number.MIN_SAFE_INTEGER);
+
+  return goodNodesCounter;
+};
+```
+
+#### Shortest Distance Between Two Nodes (LCA) Lowest Common Ancestor
+
+```javascript
+var minDiffInBST = function (root, a = 3, b = 9) {
+  let minDiff = 0;
+
+  // Takes LCA
+  const sumDistance = (root, distance) => {
+    if (!root) return;
+
+    distance += 1;
+    if (root.val === a || root.val === b) {
+      minDiff += distance;
+    }
+
+    sumDistance(root.left, distance);
+    sumDistance(root.right, distance);
+  };
+  const dfs = (root) => {
+    if (!root) return;
+
+    if (a > root.val && b > root.val) {
+      return dfs(root.right);
+    }
+
+    if (a < root.val && b < root.val) {
+      return dfs(root.left);
+    }
+    sumDistance(root.left, 0);
+    sumDistance(root.right, 0);
+  };
+
+  dfs(root);
+
+  return minDiff;
 };
 ```
