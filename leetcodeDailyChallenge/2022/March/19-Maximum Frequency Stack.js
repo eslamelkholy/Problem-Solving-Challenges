@@ -42,6 +42,38 @@ class FreqStack {
   }
 }
 
+class FreqStack {
+  constructor() {
+    this.freqMap = {};
+    this.freqMapGroupStack = {};
+    this.mostFreq = 1;
+  }
+  /**
+   * @param {number} val
+   * @return {void}
+   */
+  push(val) {
+    this.freqMap[val] = this.freqMap[val] + 1 || 1;
+    const frequency = this.freqMap[val];
+
+    if (!this.freqMapGroupStack[frequency]) this.freqMapGroupStack[frequency] = [];
+    this.freqMapGroupStack[frequency].push(val);
+
+    this.mostFreq = Math.max(this.mostFreq, frequency);
+  }
+  /**
+   * @return {number}
+   */
+  pop() {
+    const val = this.freqMapGroupStack[this.mostFreq].pop();
+
+    this.freqMap[val]--;
+    if (this.freqMapGroupStack[this.mostFreq].length === 0) this.mostFreq--;
+
+    return val;
+  }
+}
+
 /**
  * Your FreqStack object will be instantiated and called as such:
  * var obj = new FreqStack()
