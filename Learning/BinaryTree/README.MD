@@ -411,3 +411,79 @@ var minDiffInBST = function (root, a = 3, b = 9) {
   return minDiff;
 };
 ```
+
+#### Construct Binary Tree from Inorder and Postorder Traversal
+
+```javascript
+var buildTree1 = function (inorder, postorder) {
+  const nodesMap = {};
+
+  inorder.forEach((val, index) => (nodesMap[val] = index));
+  let leftPointer = 0;
+  let rightPointer = inorder.length - 1;
+
+  const construct = (start, end) => {
+    if (start > end) return null;
+
+    const nodeVal = postorder.pop();
+    const nodeIndex = nodesMap[nodeVal];
+
+    const root = new TreeNode(nodeVal);
+    root.right = construct(nodeIndex + 1, end);
+    root.left = construct(start, nodeIndex - 1);
+
+    return root;
+  };
+
+  return construct(leftPointer, rightPointer);
+};
+```
+
+#### Construct Binary Tree from Preorder and Inorder Traversal
+
+```javascript
+var buildTree = function (preorder, inorder) {
+  const nodesMap = {};
+  const leftPointer = 0;
+  const rightPointer = inorder.length - 1;
+
+  inorder.forEach((val, index) => (nodesMap[val] = index));
+
+  const construct = (start, end) => {
+    if (start > end) return null;
+
+    const nodeVal = preorder.shift();
+    const root = new TreeNode(nodeVal);
+
+    const nodeIndex = nodesMap[nodeVal];
+
+    root.left = construct(start, nodeIndex - 1);
+    root.right = construct(nodeIndex + 1, end);
+
+    return root;
+  };
+
+  return construct(leftPointer, rightPointer);
+};
+```
+
+#### Populating Next Right Pointers in Each Node
+
+```javascript
+var connect = function (root) {
+  if (!root) return null;
+  const queue = [root];
+  while (queue.length > 0) {
+    const n = queue.length;
+
+    for (let i = 0; i < n; i++) {
+      let node = queue.shift();
+      node.next = i === n - 1 ? null : queue[0];
+
+      if (node.left) queue.push(node.left);
+      if (node.right) queue.push(node.right);
+    }
+  }
+  return root;
+};
+```
