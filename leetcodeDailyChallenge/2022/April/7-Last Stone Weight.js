@@ -5,6 +5,7 @@
 var lastStoneWeight = function (stones) {
   const destroy = () => {
     if (stones.length <= 1) return;
+    stones.sort((a, b) => b - a);
     const [y, x] = stones;
 
     if (x === y) {
@@ -12,7 +13,6 @@ var lastStoneWeight = function (stones) {
     } else {
       stones.splice(1, 1);
       stones[0] = y - x;
-      stones.sort((a, b) => b - a);
     }
     destroy();
   };
