@@ -17,7 +17,8 @@ class KthLargest {
   add(val) {
     if (this.heap.size() < this.k) {
       this.heap.offer(val);
-    } else if (this.heap.peek() < val) {
+    }
+    if (this.heap.peek() < val) {
       this.heap.offer(val);
       this.heap.poll();
     }
