@@ -18,13 +18,11 @@ var rotateTimeLimitExceed = function (nums, k) {
   3. Reverse the rest.
 */
 var rotate = function (nums, k) {
-  if (nums === null || nums.length === 0) {
-    return;
-  }
   k = k % nums.length;
   if (k === 0) {
     return;
   }
+
   nums.reverse();
   reverse(nums, 0, k - 1);
   reverse(nums, k, nums.length - 1);
@@ -39,4 +37,4 @@ const reverse = (arr, start, end) => {
   }
 };
 
-console.log(rotate([1, 2, 3, 4, 5, 6, 7], 15));
+console.log(rotate([1, 2, 3, 4, 5, 6, 7], 3));
