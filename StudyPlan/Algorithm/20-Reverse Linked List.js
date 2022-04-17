@@ -21,9 +21,8 @@ var reverseList = function (head) {
     const node = new ListNode(values.shift(), result);
     result = node;
   }
-  return result ? result : head;
+  return result || head;
 };
-
 /**
  * Definition for singly-linked list.
  * function ListNode(val, next) {
