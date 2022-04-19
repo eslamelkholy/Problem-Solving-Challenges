@@ -4,17 +4,29 @@
  */
 const permute = function (nums) {
   const res = [];
-  dfs(res, [], nums);
+  dfs(res, nums);
   return res;
 };
 
-const dfs = (res, arr, nums) => {
-  if (arr.length === nums.length) {
-    res.push([...arr]);
-    return;
+const dfs = (res, nums, arr = []) => {
+  if (nums.length === arr.length) return res.push([...arr]);
+
+  for (const num of nums) {
+    if (!arr.includes(num)) dfs(res, nums, [...arr, num]);
   }
-  for (let i = 0; i < nums.length; i++) {
-    if (!arr.includes(nums[i])) dfs(res, [...arr, nums[i]], nums);
-  }
+};
+
+const permute2 = function (nums) {
+  const res = [];
+  const dfs = (arr = []) => {
+    if (nums.length === arr.length) return res.push([...arr]);
+
+    for (const num of nums) {
+      if (!arr.includes(num)) dfs([...arr, num]);
+    }
+  };
+  dfs();
+
+  return res;
 };
 console.log(permute([1, 2, 3]));
