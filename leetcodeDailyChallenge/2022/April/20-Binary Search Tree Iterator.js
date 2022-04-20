@@ -9,7 +9,7 @@
 /**
  * @param {TreeNode} root
  */
-class BSTIterator {
+class BSTIterator1 {
   constructor(root) {
     this.root = root;
     this.values = [];
@@ -26,6 +26,37 @@ class BSTIterator {
    */
   hasNext() {
     return this.values.length > 0;
+  }
+
+  inorderTraverse(root) {
+    if (!root) return root;
+
+    this.inorderTraverse(root.left);
+
+    this.values.push(root.val);
+
+    this.inorderTraverse(root.right);
+  }
+}
+
+class BSTIterator {
+  constructor(root) {
+    this.root = root;
+    this.values = [];
+    this.inorderTraverse(this.root);
+    this.pointer = 0;
+  }
+  /**
+   * @return {number}
+   */
+  next() {
+    return this.values[this.pointer++];
+  }
+  /**
+   * @return {boolean}
+   */
+  hasNext() {
+    return this.pointer < this.values.length;
   }
 
   inorderTraverse(root) {
