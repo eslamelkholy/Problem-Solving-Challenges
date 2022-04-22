@@ -5,3 +5,13 @@ var singleNumber = function (nums) {
 
   for (const [key, value] of map) if (value === 1) return key;
 };
+
+var singleNumber = function (nums) {
+  let ans = nums[0];
+
+  for (let i = 1; i < nums.length; i++) {
+    ans ^= nums[i];
+  }
+
+  return ans;
+};
