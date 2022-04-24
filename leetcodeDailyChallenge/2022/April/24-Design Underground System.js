@@ -24,11 +24,11 @@ class UndergroundSystem {
     const stationDesitination = station + '-' + stationName;
     const averageBetween = this.averageTimeMap.get(stationDesitination);
     this.checkinMap.delete(id);
-
     if (!averageBetween) {
-      this.averageTimeMap.set(stationDesitination, [checkoutTime]);
+      this.averageTimeMap.set(stationDesitination, [checkoutTime, 1]);
     } else {
-      this.averageTimeMap.set(stationDesitination, [...averageBetween, checkoutTime]);
+      let [sum, count] = averageBetween;
+      this.averageTimeMap.set(stationDesitination, [sum + checkoutTime, count + 1]);
     }
     return checkoutTime;
   }
@@ -39,8 +39,8 @@ class UndergroundSystem {
    */
   getAverageTime(startStation, endStation) {
     const stationDesitination = startStation + '-' + endStation;
-    const averageBetween = this.averageTimeMap.get(stationDesitination);
-    return averageBetween.reduce((a, b) => a + b, 0) / averageBetween.length;
+    const [sum, count] = this.averageTimeMap.get(stationDesitination);
+    return sum / count;
   }
 }
 
