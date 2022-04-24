@@ -1,49 +1,48 @@
-var UndergroundSystem = function () {
-  this.checkinMap = new Map();
-  this.averageTimeMap = new Map();
-};
-
-/**
- * @param {number} id
- * @param {string} stationName
- * @param {number} t
- * @return {void}
- */
-UndergroundSystem.prototype.checkIn = function (id, stationName, t) {
-  this.checkinMap.set(id, [stationName, t]);
-};
-
-/**
- * @param {number} id
- * @param {string} stationName
- * @param {number} t
- * @return {void}
- */
-UndergroundSystem.prototype.checkOut = function (id, stationName, t) {
-  const [station, time] = this.checkinMap.get(id);
-  const checkoutTime = Math.abs(t - time);
-  const stationDesitination = station + '-' + stationName;
-  const averageBetween = this.averageTimeMap.get(stationDesitination);
-  this.checkinMap.delete(id);
-
-  if (!averageBetween) {
-    this.averageTimeMap.set(stationDesitination, [checkoutTime]);
-  } else {
-    this.averageTimeMap.set(stationDesitination, [...averageBetween, checkoutTime]);
+class UndergroundSystem {
+  constructor() {
+    this.checkinMap = new Map();
+    this.averageTimeMap = new Map();
   }
-  return checkoutTime;
-};
+  /**
+   * @param {number} id
+   * @param {string} stationName
+   * @param {number} t
+   * @return {void}
+   */
+  checkIn(id, stationName, t) {
+    this.checkinMap.set(id, [stationName, t]);
+  }
+  /**
+   * @param {number} id
+   * @param {string} stationName
+   * @param {number} t
+   * @return {void}
+   */
+  checkOut(id, stationName, t) {
+    const [station, time] = this.checkinMap.get(id);
+    const checkoutTime = Math.abs(t - time);
+    const stationDesitination = station + '-' + stationName;
+    const averageBetween = this.averageTimeMap.get(stationDesitination);
+    this.checkinMap.delete(id);
 
-/**
- * @param {string} startStation
- * @param {string} endStation
- * @return {number}
- */
-UndergroundSystem.prototype.getAverageTime = function (startStation, endStation) {
-  const stationDesitination = startStation + '-' + endStation;
-  const averageBetween = this.averageTimeMap.get(stationDesitination);
-  return averageBetween.reduce((a, b) => a + b, 0) / averageBetween.length;
-};
+    if (!averageBetween) {
+      this.averageTimeMap.set(stationDesitination, [checkoutTime]);
+    } else {
+      this.averageTimeMap.set(stationDesitination, [...averageBetween, checkoutTime]);
+    }
+    return checkoutTime;
+  }
+  /**
+   * @param {string} startStation
+   * @param {string} endStation
+   * @return {number}
+   */
+  getAverageTime(startStation, endStation) {
+    const stationDesitination = startStation + '-' + endStation;
+    const averageBetween = this.averageTimeMap.get(stationDesitination);
+    return averageBetween.reduce((a, b) => a + b, 0) / averageBetween.length;
+  }
+}
 
 /**
  * Your UndergroundSystem object will be instantiated and called as such:
