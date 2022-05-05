@@ -35,6 +35,38 @@ class MyStack {
 }
 
 /**
+ * @param {number} x
+ * @return {void}
+ */
+MyStack.prototype.push = function (x) {
+  let length = this.stack.length;
+  this.stack.push(x);
+  for (let i = 0; i < length; i++) {
+    this.stack.push(this.stack.shift());
+  }
+};
+
+/**
+ * @return {number}
+ */
+MyStack.prototype.pop = function () {
+  return this.stack.shift();
+};
+
+/**
+ * @return {number}
+ */
+MyStack.prototype.top = function () {
+  return this.stack[0];
+};
+
+/**
+ * @return {boolean}
+ */
+MyStack.prototype.empty = function () {
+  return !this.stack.length;
+};
+/**
  * Your MyStack object will be instantiated and called as such:
  * var obj = new MyStack()
  * obj.push(x)
