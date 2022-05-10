@@ -34,6 +34,32 @@ var combinationSum3 = function (k, n) {
   return result;
 };
 
+var combinationSum3 = function (k, n) {
+  const res = [];
+  const nums = [];
+  let sum = 0;
+
+  function dfs(nums, sum, num) {
+    if (sum > n) return;
+    if (sum === n && nums.length === k) {
+      res.push([...nums]);
+      return;
+    }
+
+    for (let i = num; i <= 9; i++) {
+      nums.push(i);
+      sum += i;
+      dfs(nums, sum, i + 1);
+      sum -= i;
+      nums.pop();
+    }
+  }
+
+  dfs(nums, sum, 1);
+
+  return res;
+};
+
 console.log(combinationSum3(3, 7));
 console.log(combinationSum3(3, 9));
 console.log(combinationSum3(2, 18));
