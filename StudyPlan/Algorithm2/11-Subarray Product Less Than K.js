@@ -3,7 +3,7 @@
  * @param {number} k
  * @return {number}
  */
-var numSubarrayProductLessThanK = function (nums, k) {
+var numSubarrayProductLessThanKBruteForce = function (nums, k) {
   let result = 0;
   for (let i = 0; i < nums.length; i++) {
     const sub = [];
@@ -23,5 +23,27 @@ var numSubarrayProductLessThanK = function (nums, k) {
   return result;
 };
 
-console.log(numSubarrayProductLessThanK([10, 5, 2, 6], 100));
+/**
+ * @param {number[]} nums
+ * @param {number} k
+ * @return {number}
+ */
+var numSubarrayProductLessThanK = function (nums, k) {
+  let count = 0;
+  let left = 0;
+  let right = 0;
+  let product = 1;
+
+  while (right < nums.length) {
+    product *= nums[right];
+    while (left <= right && product >= k) product /= nums[left++];
+
+    count += right - left + 1;
+    right++;
+  }
+
+  return count;
+};
+
+console.log(numSubarrayProductLessThanK([10, 5, 2, 6], 100)); // 8
 console.log(numSubarrayProductLessThanK([1, 2, 3], 0));
