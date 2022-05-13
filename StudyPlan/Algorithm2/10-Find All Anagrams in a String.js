@@ -35,11 +35,13 @@ const isTwoHashMapEquals = (hash1, hash2) => {
 var findAnagrams = function (s, p) {
   const pHash = {};
   const result = [];
-  for (const char of p) pHash[char] ? pHash[char]++ : (pHash[char] = 1);
+  for (const char of p) {
+    pHash[char] ? pHash[char]++ : (pHash[char] = 1);
+  }
+
   let left = 0;
   let right = 0;
   let count = p.length;
-
   while (right < s.length) {
     const currentChar = s[right];
     if (pHash[currentChar] > 0) count--;
@@ -49,8 +51,11 @@ var findAnagrams = function (s, p) {
 
     if (count === 0) result.push(left);
 
+    // The Window Length reaches p
     if (right - left === p.length) {
-      if (pHash[s[left]] >= 0) count++;
+      if (pHash[s[left]] >= 0) {
+        count++;
+      }
 
       pHash[s[left]]++;
       left++;
