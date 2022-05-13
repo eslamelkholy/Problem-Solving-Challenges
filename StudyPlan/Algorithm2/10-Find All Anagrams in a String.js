@@ -3,7 +3,7 @@
  * @param {string} p
  * @return {number[]}
  */
-var findAnagrams = function (s, p) {
+var findAnagramsBruteForceTLE = function (s, p) {
   const pHash = {};
   const result = [];
   for (const char of p) pHash[char] ? pHash[char]++ : (pHash[char] = 1);
@@ -25,6 +25,39 @@ var findAnagrams = function (s, p) {
 
 const isTwoHashMapEquals = (hash1, hash2) => {
   return Object.entries(hash1).sort().toString() === Object.entries(hash2).sort().toString();
+};
+
+/**
+ * @param {string} s
+ * @param {string} p
+ * @return {number[]}
+ */
+var findAnagrams = function (s, p) {
+  const pHash = {};
+  const result = [];
+  for (const char of p) pHash[char] ? pHash[char]++ : (pHash[char] = 1);
+  let left = 0;
+  let right = 0;
+  let count = p.length;
+
+  while (right < s.length) {
+    const currentChar = s[right];
+    if (pHash[currentChar] > 0) count--;
+
+    pHash[currentChar]--;
+    right++;
+
+    if (count === 0) result.push(left);
+
+    if (right - left === p.length) {
+      if (pHash[s[left]] >= 0) count++;
+
+      pHash[s[left]]++;
+      left++;
+    }
+  }
+
+  return result;
 };
 
 console.log(findAnagrams('cbaebabacd', 'abc'));
