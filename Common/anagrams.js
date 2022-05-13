@@ -9,8 +9,8 @@
  * 2- str1: "listen", str2: "silent"  // True
  */
 
-const { IRemoveSpecialCharacters } = require("./removeSpecialCharacters");
-const { getLetterCount } = require("./LetterCount");
+const { IRemoveSpecialCharacters } = require('./removeSpecialCharacters');
+const { getLetterCount } = require('./LetterCount');
 const isAnagram = (str1, str2) => {
   const newStr1 = IRemoveSpecialCharacters(str1);
   const newStr2 = IRemoveSpecialCharacters(str2);
@@ -19,7 +19,19 @@ const isAnagram = (str1, str2) => {
   return Object.entries(letterCount1).sort().toString() === Object.entries(letterCount2).sort().toString();
 };
 
-console.log(isAnagram("test1", "test2"));
-console.log(isAnagram("elbows", "below"));
-console.log(isAnagram("conversation", "voices rant on"));
-console.log(isAnagram("STATE", "taste"));
+const areAnagram = (str1, str2) => {
+  return (
+    str1.replace(/\W+/g, '').toLowerCase().split('').sort().join('') ===
+    str2.replace(/\W+/g, '').toLowerCase().split('').sort().join('')
+  );
+};
+
+console.log(isAnagram('test1', 'test2'));
+console.log(isAnagram('elbows', 'below'));
+console.log(isAnagram('conversation', 'voices rant on'));
+console.log(isAnagram('STATE', 'taste'));
+
+console.log(areAnagram('test1', 'test2'));
+console.log(areAnagram('elbows', 'below'));
+console.log(areAnagram('conversation', 'voices rant on'));
+console.log(areAnagram('STATE', 'taste'));
