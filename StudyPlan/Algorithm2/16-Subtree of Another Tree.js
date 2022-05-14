@@ -26,10 +26,7 @@ var isSubtree = function (root, subRoot) {
 
   const isIdentical = (sub, tree) => {
     if (!sub && !tree) return true;
-    if (tree && !sub) return false;
-    if (sub && !tree) return false;
-
-    if (sub.val !== tree.val) return false;
+    if ((tree && !sub) || (sub && !tree) || sub.val !== tree.val) return false;
 
     return isIdentical(sub.left, tree.left) && isIdentical(sub.right, tree.right);
   };
