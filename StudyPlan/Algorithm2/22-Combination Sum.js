@@ -3,28 +3,21 @@
  * @param {number} target
  * @return {number[][]}
  */
-var combinationSum1 = function (candidates, target) {
+var combinationSum = function (candidates, target) {
   const combinations = [];
-  const combinationsSet = new Set();
-
   /**
    * @param {[]} combination
    * @param {number} sum
    */
-  const exploreCombination = (combination, sum) => {
-    if (sum === target) {
-      const combinedResult = combination.sort().join('');
-      if (combinationsSet.has(combinedResult)) return;
+  const exploreCombination = (combination, sum, index) => {
+    if (sum > target) return;
+    if (sum === target) combinations.push(combination);
 
-      combinationsSet.add(combinedResult);
-      return combinations.push(combination);
-    }
-
-    for (let i = 0; i < candidates.length; i++) {
+    for (let i = index; i < candidates.length; i++) {
       const num = candidates[i];
       if (num + sum > target) continue;
 
-      exploreCombination([...combination, num], sum + num);
+      exploreCombination([...combination, num], sum + num, i);
     }
   };
 
@@ -32,7 +25,7 @@ var combinationSum1 = function (candidates, target) {
   return combinations;
 };
 
-var combinationSum = function (candidates, target) {
+var combinationSum1 = function (candidates, target) {
   const result = [];
 
   const backtrack = (path = [], remain = target, start = 0) => {
