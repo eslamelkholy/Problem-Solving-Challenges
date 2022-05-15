@@ -39,3 +39,24 @@ var deepestLeavesSum = function(root) {
     
     return sum;
 };
+
+// BFS Solution
+var deepestLeavesSum = function(root) {
+    let sum = 0;
+    const queue = [root];
+    
+    while(queue.length > 0) {
+        sum = 0;
+        const n = queue.length;
+        for(let i = 0; i < n; i++) {
+            const currentNode = queue.shift();
+            
+            sum += currentNode.val;
+            
+            if(currentNode.left) queue.push(currentNode.left);
+            if(currentNode.right) queue.push(currentNode.right);
+        }
+    }
+    
+    return sum;
+};
