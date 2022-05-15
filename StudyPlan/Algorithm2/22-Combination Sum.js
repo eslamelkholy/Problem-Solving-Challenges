@@ -12,7 +12,7 @@ var combinationSum = function (candidates, target) {
 
     for (let i = index; i < candidates.length; i++) {
       const num = candidates[i];
-      if (num + sum > target) break;
+      if (num + sum > target) continue;
 
       exploreCombination([...combination, num], sum + num, i);
     }
