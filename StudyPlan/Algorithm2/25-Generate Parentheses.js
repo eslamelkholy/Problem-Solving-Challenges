@@ -18,5 +18,25 @@ const generateParenthesis = (n) => {
   return result;
 };
 
+/**
+ * @param {number} n
+ * @return {string[]}
+ */
+const generateParenthesis2 = (n) => {
+  const result = [];
+
+  const backtrack = (leftVal, rightVal, set) => {
+    if (leftVal === n && rightVal === n) return result.push(set);
+    if (leftVal > rightVal) return;
+
+    if (leftVal < n) backtrack(leftVal + 1, rightVal, set + ')');
+    if (rightVal < n) backtrack(leftVal, rightVal + 1, set + '(');
+  };
+
+  backtrack(0, 0, '');
+
+  return result;
+};
+
 console.log(generateParenthesis(3));
 console.log(generateParenthesis(1));
