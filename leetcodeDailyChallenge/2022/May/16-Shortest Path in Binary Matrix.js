@@ -2,7 +2,7 @@
  * @param {number[][]} grid
  * @return {number}
  */
-var shortestPathBinaryMatrix = function (grid) {
+var shortestPathBinaryMatrix0 = function (grid) {
   const graph = buildGraph(grid);
   const visited = new Set();
   const start = 0 + ',' + 0;
@@ -49,6 +49,46 @@ const buildGraph = (grid) => {
   }
 
   return graph;
+};
+
+/**
+ * @param {number[][]} grid
+ * @return {number}
+ */
+var shortestPathBinaryMatrix = function (grid) {
+  const directions = [
+    [1, 0],
+    [-1, 0],
+    [0, 1],
+    [0, -1],
+    [1, 1],
+    [1, -1],
+    [-1, 1],
+    [-1, -1],
+  ];
+  if (grid[0][0] === 1) return -1;
+
+  const N = grid.length;
+  const queue = [[0, 0, 1]];
+
+  while (queue.length > 0) {
+    const [row, col, distance] = queue.shift();
+
+    if (row === N - 1 && col === N - 1) return distance;
+
+    for (const [dx, dy] of directions) {
+      const x = row + dx;
+      const y = col + dy;
+
+      if (x < 0 || x >= N) continue;
+      if (y < 0 || y >= N) continue;
+      if (grid[x][y] === 1) continue;
+
+      queue.push([x, y, distance + 1]);
+      grid[x][y] = 1; // Marked as Visited instead of Using Hashtable like previous Solution
+    }
+  }
+  return -1;
 };
 
 console.log(
