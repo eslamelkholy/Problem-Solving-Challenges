@@ -55,7 +55,11 @@ class GridTraverser {
   }
 }
 
-var uniquePathsWithObstacles = function (obstacleGrid) {
+/**
+ * @param {number[][]} obstacleGrid
+ * @return {number}
+ */
+var uniquePathsWithObstacles2 = function (obstacleGrid) {
   const M = obstacleGrid.length;
   const N = obstacleGrid[0].length;
   const memo = new Array(M).fill(0).map((v) => new Array(N).fill(0));
@@ -69,6 +73,30 @@ var uniquePathsWithObstacles = function (obstacleGrid) {
       memo[x][y] = traverse(x + 1, y) + traverse(x, y + 1);
     }
     return memo[x][y];
+  };
+
+  return traverse(0, 0);
+};
+
+/**
+ * @param {number[][]} obstacleGrid
+ * @return {number}
+ */
+var uniquePathsWithObstacles = function (obstacleGrid) {
+  const M = obstacleGrid.length;
+  const N = obstacleGrid[0].length;
+  const memo = new Array(M).fill(0).map((v) => new Array(N).fill(0)); // memo Array to Cache the Result
+
+  const traverse = (x, y) => {
+    if (obstacleGrid[x] === undefined || obstacleGrid[x][y] === undefined || obstacleGrid[x][y] === 1) return 0; // check is there is Obstacle
+
+    if (x === M - 1 && y === N - 1) return 1; // if we reach the Target we need
+
+    if (memo[x][y] === 0) {
+      // start to traverse at this point if !== 0
+      memo[x][y] = traverse(x + 1, y) + traverse(x, y + 1);
+    }
+    return memo[x][y]; // Return the result
   };
 
   return traverse(0, 0);
