@@ -6,19 +6,19 @@ var uniquePathsWithObstacles = function (obstacleGrid) {
   let paths = 0;
   const target = `${obstacleGrid.length - 1},${obstacleGrid[obstacleGrid.length - 1].length - 1}`;
 
-  const dfs = (grid, x, y, target) => {
+  const dfs = (x, y) => {
     const position = `${x},${y}`;
-    if (grid[x] === undefined || grid[x][y] === undefined || grid[x][y] === 1) return 0;
+    if (obstacleGrid[x] === undefined || obstacleGrid[x][y] === undefined || obstacleGrid[x][y] === 1) return 0;
 
     if (position === target) {
       return paths++;
     }
 
-    dfs(grid, x + 1, y, target);
-    dfs(grid, x, y + 1, target);
+    dfs(x + 1, y);
+    dfs(x, y + 1);
   };
 
-  dfs(obstacleGrid, 0, 0, target);
+  dfs(0, 0);
 
   return paths;
 };
