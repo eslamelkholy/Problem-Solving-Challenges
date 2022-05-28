@@ -21,3 +21,13 @@ var missingNumber = function(nums) {
     }
     return -1;
 };
+
+var missingNumber = function(nums) {
+    let sum = 0;
+    let N = nums.length;
+    for( let i=0 ; i< N ; ++i ){
+        sum += nums[i]; 
+    }
+		
+    return N * (N + 1)/2 - sum;  
+};
