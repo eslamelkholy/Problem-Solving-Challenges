@@ -10,8 +10,7 @@ var longestOnes = function (inputArr, maxFlips) {
   let right = 0;
 
   while (right < inputArr.length) {
-    const currentBinary = inputArr[right];
-    if (currentBinary === 0) {
+    if (inputArr[right] === 0) {
       currentFlips++;
     }
 
@@ -20,10 +19,7 @@ var longestOnes = function (inputArr, maxFlips) {
       left++;
     }
 
-    const lengthOfSubSequence = right - left + 1;
-    if (lengthOfSubSequence > maxSequence) {
-      maxSequence = lengthOfSubSequence;
-    }
+    maxSequence = Math.max(maxSequence, right - left + 1);
 
     right++;
   }
