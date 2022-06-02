@@ -20,11 +20,12 @@ var findAnagrams = function (s, p) {
       currentStrMap[char] ? currentStrMap[char]++ : (currentStrMap[char] = 1);
     }
 
+    // Compare the Frequency
     if (strMap[char] && compareFrequency(strMap, currentStrMap)) {
       result.push(left);
     }
 
-    currentWindowLength = right - left + 1;
+    currentWindowLength = right - left + 1; // Reaches the limit of Window Length
     if (currentWindowLength === p.length) {
       if (currentStrMap[s[left]]) currentStrMap[s[left]]--;
       left++;
