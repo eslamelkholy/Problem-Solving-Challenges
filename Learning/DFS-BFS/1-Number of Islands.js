@@ -34,29 +34,60 @@ const traverseIsland0 = (grid, visited, x, y) => {
  * @param {character[][]} grid
  * @return {number}
  */
-var numIslands = function (grid) {
+var numIslands1 = function (grid) {
   let islands = 0;
   for (let i = 0; i < grid.length; i++) {
     for (let j = 0; j < grid[i].length; j++) {
-      islands += traverseIsland(grid, i, j);
+      islands += traverseIsland1(grid, i, j);
     }
   }
   return islands;
 };
 
-const traverseIsland = (grid, x, y) => {
+const traverseIsland1 = (grid, x, y) => {
   if (grid[x] === undefined || grid[x][y] === undefined || grid[x][y] === '0') {
     return 0;
   }
 
   grid[x][y] = '0';
 
-  traverseIsland(grid, x + 1, y);
-  traverseIsland(grid, x - 1, y);
-  traverseIsland(grid, x, y + 1);
-  traverseIsland(grid, x, y - 1);
+  traverseIsland1(grid, x + 1, y);
+  traverseIsland1(grid, x - 1, y);
+  traverseIsland1(grid, x, y + 1);
+  traverseIsland1(grid, x, y - 1);
 
   return 1;
+};
+
+/**
+ * @param {character[][]} grid
+ * @return {number}
+ */
+var numIslands = function (grid) {
+  let islands = 0;
+
+  const traverseIsland = (x, y) => {
+    if (grid[x] === undefined || grid[x][y] === undefined || grid[x][y] === '0') {
+      return 0;
+    }
+
+    grid[x][y] = '0';
+
+    traverseIsland(x + 1, y);
+    traverseIsland(x - 1, y);
+    traverseIsland(x, y + 1);
+    traverseIsland(x, y - 1);
+
+    return 1;
+  };
+
+  for (let i = 0; i < grid.length; i++) {
+    for (let j = 0; j < grid[i].length; j++) {
+      islands += traverseIsland(i, j);
+    }
+  }
+
+  return islands;
 };
 
 console.log(
