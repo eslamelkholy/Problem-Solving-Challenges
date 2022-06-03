@@ -1,7 +1,7 @@
 /**
  * @param {number[][]} matrix
  */
-class NumMatrix {
+class NumMatrix0 {
   constructor(matrix) {
     this.matrix = matrix;
   }
@@ -18,6 +18,39 @@ class NumMatrix {
       for (let j = col1; j <= col2; j++) {
         sum += this.matrix[i][j];
       }
+    }
+
+    return sum;
+  }
+}
+
+/**
+ * @param {number[][]} matrix
+ */
+class NumMatrix {
+  constructor(matrix) {
+    const M = matrix.length;
+    const N = matrix[0].length;
+    this.dp = [];
+
+    for (let i = 0; i < M; i++) {
+      this.dp[i] = Array(N).fill(0);
+      for (let j = 0; j < N; j++) {
+        this.dp[i][j + 1] = this.dp[i][j] + matrix[i][j];
+      }
+    }
+  }
+  /**
+   * @param {number} row1
+   * @param {number} col1
+   * @param {number} row2
+   * @param {number} col2
+   * @return {number}
+   */
+  sumRegion(row1, col1, row2, col2) {
+    let sum = 0;
+    for (let row = row1; row <= row2; row++) {
+      sum += this.dp[row][col2 + 1] - this.dp[row][col1];
     }
 
     return sum;
