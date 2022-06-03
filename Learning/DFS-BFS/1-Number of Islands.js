@@ -2,7 +2,7 @@
  * @param {character[][]} grid
  * @return {number}
  */
-var numIslands = function (grid) {
+var numIslands0 = function (grid) {
   const visited = new Set();
   let islands = 0;
 
@@ -14,7 +14,7 @@ var numIslands = function (grid) {
   return islands;
 };
 
-const traverseIsland = (grid, visited, x, y) => {
+const traverseIsland0 = (grid, visited, x, y) => {
   const position = x + ',' + y;
   if (grid[x] === undefined || grid[x][y] === undefined || grid[x][y] === '0' || visited.has(position)) {
     return 0;
@@ -22,10 +22,39 @@ const traverseIsland = (grid, visited, x, y) => {
 
   visited.add(position);
 
-  traverseIsland(grid, visited, x + 1, y);
-  traverseIsland(grid, visited, x - 1, y);
-  traverseIsland(grid, visited, x, y + 1);
-  traverseIsland(grid, visited, x, y - 1);
+  traverseIsland0(grid, visited, x + 1, y);
+  traverseIsland0(grid, visited, x - 1, y);
+  traverseIsland0(grid, visited, x, y + 1);
+  traverseIsland0(grid, visited, x, y - 1);
+
+  return 1;
+};
+
+/**
+ * @param {character[][]} grid
+ * @return {number}
+ */
+var numIslands = function (grid) {
+  let islands = 0;
+  for (let i = 0; i < grid.length; i++) {
+    for (let j = 0; j < grid[i].length; j++) {
+      islands += traverseIsland(grid, i, j);
+    }
+  }
+  return islands;
+};
+
+const traverseIsland = (grid, x, y) => {
+  if (grid[x] === undefined || grid[x][y] === undefined || grid[x][y] === '0') {
+    return 0;
+  }
+
+  grid[x][y] = '0';
+
+  traverseIsland(grid, x + 1, y);
+  traverseIsland(grid, x - 1, y);
+  traverseIsland(grid, x, y + 1);
+  traverseIsland(grid, x, y - 1);
 
   return 1;
 };
