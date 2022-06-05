@@ -17,7 +17,7 @@ const permuteDfs0 = (result, prefix, nums) => {
   for (const num of nums) {
     if (prefix.includes(num)) continue;
 
-    permuteDfs(result, [...prefix, num], nums);
+    permuteDfs0(result, [...prefix, num], nums);
   }
 };
 
@@ -48,13 +48,20 @@ const permute1 = function (nums) {
  * @param {number[]} nums
  * @return {number[][]}
  */
-const permute = function (nums) {
+const permute2 = function (nums) {
   const result = [];
-  permuteDfs(result, [], nums);
+  permuteDfs2(result, [], nums);
 
   return result;
 };
-const permuteDfs = (result, currentList, nums) => {
+
+/**
+ * @param {[][]} result
+ * @param {number[]} currentList
+ * @param {number[]} nums
+ * @return {void}
+ */
+const permuteDfs2 = (result, currentList, nums) => {
   if (currentList.length === nums.length) {
     return result.push(currentList);
   }
@@ -64,10 +71,41 @@ const permuteDfs = (result, currentList, nums) => {
 
     currentList.push(num);
 
-    permuteDfs(result, [...currentList], nums);
+    permuteDfs2(result, [...currentList], nums);
 
     currentList.pop();
   }
+};
+
+/**
+ * @param {number[]} nums
+ * @return {number[][]}
+ */
+const permute = function (nums) {
+  return permuteDFS([], nums, []);
+};
+
+/**
+ *
+ * @param {number[]} currentList
+ * @param {number[]} nums
+ * @param {number[][]} result
+ */
+const permuteDFS = (currentList, nums, result) => {
+  if (currentList.length === nums.length) {
+    return result.push([...currentList]);
+  }
+
+  for (const num of nums) {
+    if (currentList.includes(num)) continue;
+
+    currentList.push(num);
+
+    permuteDFS(currentList, nums, result);
+
+    currentList.pop();
+  }
+  return result;
 };
 
 console.log(permute([1, 2, 3]));
