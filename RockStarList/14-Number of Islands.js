@@ -3,29 +3,26 @@
  * @return {number}
  */
 var numIslands = function (grid) {
-  const visited = new Set();
   let islands = 0;
 
   for (let i = 0; i < grid.length; i++) {
     for (let j = 0; j < grid[i].length; j++) {
-      islands += traverseIslands(grid, visited, i, j);
+      islands += traverseIslands(grid, i, j);
     }
   }
   return islands;
 };
 
-const traverseIslands = (grid, visited, x, y) => {
-  const position = x + ',' + y;
-  if (grid[x] === undefined || grid[x][y] === undefined || grid[x][y] === '0' || visited.has(position)) {
+const traverseIslands = (grid, x, y) => {
+  if (grid[x] === undefined || grid[x][y] === undefined || grid[x][y] === '0') {
     return 0;
   }
+  grid[x][y] = '0';
 
-  visited.add(position);
-
-  traverseIslands(grid, visited, x + 1, y);
-  traverseIslands(grid, visited, x - 1, y);
-  traverseIslands(grid, visited, x, y + 1);
-  traverseIslands(grid, visited, x, y - 1);
+  traverseIslands(grid, x + 1, y);
+  traverseIslands(grid, x - 1, y);
+  traverseIslands(grid, x, y + 1);
+  traverseIslands(grid, x, y - 1);
 
   return 1;
 };
