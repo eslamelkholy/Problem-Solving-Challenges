@@ -2,7 +2,7 @@
  * @param {string} s
  * @return {number}
  */
-var removePalindromeSub = function (s) {
+var removePalindromeSub0 = function (s) {
   if (isPalindrom(s)) return 1;
   for (let i = 0; i < s.length; i++) {
     let subSeq = s[i];
@@ -14,6 +14,16 @@ var removePalindromeSub = function (s) {
     }
   }
   return 1;
+};
+
+/**
+ * @param {string} s
+ * @return {number}
+ */
+var removePalindromeSub = function (s) {
+  if (isPalindrom(s)) return 1;
+
+  return 2;
 };
 
 const isPalindrom = (s) => {
