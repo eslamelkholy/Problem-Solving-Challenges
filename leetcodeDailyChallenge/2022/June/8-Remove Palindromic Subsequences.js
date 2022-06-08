@@ -20,7 +20,7 @@ var removePalindromeSub0 = function (s) {
  * @param {string} s
  * @return {number}
  */
-var removePalindromeSub = function (s) {
+var removePalindromeSub1 = function (s) {
   if (isPalindrom(s)) return 1;
 
   return 2;
@@ -31,6 +31,13 @@ const isPalindrom = (s) => {
     if (s[i] !== s[s.length - i - 1]) return false;
   }
   return true;
+};
+
+var removePalindromeSub = function (s) {
+  for (let i = 0; i < s.length; i++) {
+    if (s[i] !== s[s.length - i - 1]) return 2;
+  }
+  return 1;
 };
 
 console.log(removePalindromeSub('ababa'));
