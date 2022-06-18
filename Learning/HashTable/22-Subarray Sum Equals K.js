@@ -4,17 +4,21 @@
  * @return {number}
  */
 var subarraySum = function (nums, k) {
-  const numsMap = new Map();
-  numsMap.set(0, 1);
+  const numsMap = { 0: 1 };
+  let sum = 0;
+  let occuranceCount = 0;
 
-  var sum = 0;
-  var occuranceCount = 0;
-  for (var num of nums) {
+  for (let num of nums) {
     sum += num;
-    if (numsMap.has(sum - k)) {
-      occuranceCount += numsMap.get(sum - k);
+    if (numsMap[sum - k] !== undefined) {
+      occuranceCount += numsMap[sum - k];
     }
-    numsMap.set(sum, numsMap.has(sum) ? numsMap.get(sum) + 1 : 1);
+
+    if (numsMap[sum] !== undefined) {
+      numsMap[sum]++;
+    } else {
+      numsMap[sum] = 1;
+    }
   }
   return occuranceCount;
 };
