@@ -24,3 +24,20 @@ const binarySearch = (arr, target) => {
     }
     return false;
 }
+
+var searchMatrix = function(matrix, target) {
+    var row = 0;
+    var col = matrix[0].length - 1;
+    
+    while(row <= matrix.length - 1 && col >= 0){
+        
+        if(matrix[row][col] === target) return true;
+        
+        if(matrix[row][col] > target){
+            col--;
+        }else if(matrix[row][col] < target){
+            row++;
+        }
+    }
+    return false;
+};
