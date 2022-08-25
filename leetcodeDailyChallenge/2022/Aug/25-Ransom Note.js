@@ -23,3 +23,27 @@
     
     return true;
 };
+
+
+/**
+ * @param {string} ransomNote
+ * @param {string} magazine
+ * @return {boolean}
+ */
+ var canConstruct = function(ransomNote, magazine) {
+    const magazineCharFreq = {};
+    
+    for(const char of magazine) {
+        magazineCharFreq[char] ? magazineCharFreq[char]++: magazineCharFreq[char] = 1;
+    }
+
+    for(const char of ransomNote) {
+        console.log(char);
+        if(magazineCharFreq[char] === undefined || --magazineCharFreq[char] < 0) {
+            return false;
+        }
+    }
+    
+    return true;
+};
+
