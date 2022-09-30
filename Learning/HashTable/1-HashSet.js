@@ -1,38 +1,52 @@
 /**
- * Initialize your data structure here.
+ * Let Use Hash Function y = x % 5;
  */
 class MyHashSet {
-  constructor() {
-    this.set = new Set();
-  }
+  constructor() {}
   /**
    * @param {number} key
    * @return {void}
    */
   add(key) {
-    this.set.add(key);
+    const bucket = this.hashFunction(key);
+
+    if (this[bucket]) {
+      this[bucket] = [...this[bucket], key];
+    } else {
+      this[bucket] = [key];
+    }
   }
   /**
    * @param {number} key
    * @return {void}
    */
   remove(key) {
-    this.set.delete(key);
+    const bucket = this.hashFunction(key);
+    const bucketArray = this[bucket];
+    if (!bucketArray) return false;
+
+    this[bucket] = bucketArray.filter((val) => val !== key);
   }
+
   /**
-   * Returns true if this set contains the specified element
    * @param {number} key
    * @return {boolean}
    */
   contains(key) {
-    return this.set.has(key);
+    const bucket = this.hashFunction(key);
+    const bucketArray = this[bucket];
+    if (!bucketArray) return false;
+
+    const found = bucketArray.find((val) => val === key);
+    return found !== undefined;
+  }
+
+  /**
+   * @param {number} key
+   * @return {number}
+   */
+  hashFunction(key) {
+    const bucket = key % 5;
+    return bucket;
   }
 }
-
-/**
- * Your MyHashSet object will be instantiated and called as such:
- * var obj = new MyHashSet()
- * obj.add(key)
- * obj.remove(key)
- * var param_3 = obj.contains(key)
- */
