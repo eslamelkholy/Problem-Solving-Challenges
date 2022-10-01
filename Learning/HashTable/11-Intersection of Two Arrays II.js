@@ -24,5 +24,33 @@ var intersect = function (nums1, nums2) {
   return result;
 };
 
+/**
+ * @param {number[]} nums1
+ * @param {number[]} nums2
+ * @return {number[]}
+ */
+var intersect = function (nums1, nums2) {
+  const freqMap1 = {};
+  const freqMap2 = {};
+  const result = [];
+
+  for (const num of nums1) {
+    freqMap1[num] ? freqMap1[num]++ : (freqMap1[num] = 1);
+  }
+  for (const num of nums2) {
+    freqMap2[num] ? freqMap2[num]++ : (freqMap2[num] = 1);
+  }
+
+  for (const key in freqMap1) {
+    if (freqMap2[key] === undefined) continue;
+
+    const N = freqMap2[key] > freqMap1[key] ? freqMap1[key] : freqMap2[key];
+    for (let i = 0; i < N; i++) {
+      result.push(key);
+    }
+  }
+  return result;
+};
+
 console.log(intersect([1, 2, 2, 1], [2, 2]));
 // console.log(intersect([4, 9, 5], [9, 4, 9, 8, 4]));
