@@ -17,4 +17,28 @@ const findIntersection = (set1, set2) => {
   return result;
 };
 
+/**
+ * @param {number[]} nums1
+ * @param {number[]} nums2
+ * @return {number[]}
+ */
+var intersection = function (nums1, nums2) {
+  const numsSet = new Set();
+  const intersectionSet = new Set();
+  const result = [];
+
+  for (const num of nums1) {
+    numsSet.add(num);
+  }
+
+  for (const num of nums2) {
+    if (numsSet.has(num) && !intersectionSet.has(num)) {
+      result.push(num);
+      intersectionSet.add(num);
+    }
+  }
+
+  return result;
+};
+
 console.log(intersection([1, 2, 2, 1], [2, 2]));
