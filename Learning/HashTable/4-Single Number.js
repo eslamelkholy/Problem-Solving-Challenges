@@ -3,10 +3,12 @@
  * @return {number}
  */
 var singleNumber = function (nums) {
-  const map = new Map();
-  for (const num of nums) map.has(num) ? map.set(num, map.get(num) + 1) : map.set(num, 1);
+  const numMap = {};
 
-  for (const [key, value] of map) if (value === 1) return key;
+  for (const num of nums) {
+    numMap[num] ? numMap[num]++ : (numMap[num] = 1);
+  }
+  for (const key in numMap) if (numMap[key] === 1) return key;
 };
 
 console.log(singleNumber([2, 2, 1]));
