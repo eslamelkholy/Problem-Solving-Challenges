@@ -13,12 +13,7 @@ var floodFill = function (image, sr, sc, newColor) {
 
 const fillImage = (image, x, y, oldColor, newColor, visited) => {
   const position = x + "-" + y;
-  if (
-    image[x] === undefined ||
-    image[x][y] === undefined ||
-    image[x][y] !== oldColor ||
-    visited.has(position)
-  )
+  if (image[x] === undefined || image[x][y] === undefined || image[x][y] !== oldColor || visited.has(position))
     return image;
 
   visited.add(position);
@@ -56,3 +51,36 @@ console.log(
     2
   )
 );
+
+var floodFill = function (image, sr, sc, newColor) {
+  const stack = [];
+  const visited = new Set();
+  stack.push({ x: sr, y: sc });
+  const mainColor = image[sr][sc];
+
+  while (stack.length > 0) {
+    const { x, y } = stack.pop();
+    const position = x + "," + y;
+
+    if (
+      image[x] === undefined ||
+      image[x][y] === undefined ||
+      image[x][y] !== mainColor ||
+      visited.has(position)
+    ) {
+      continue;
+    }
+
+    if (image[x][y] === mainColor) {
+      image[x][y] = newColor;
+    }
+
+    visited.add(position);
+
+    stack.push({ x: x + 1, y: y });
+    stack.push({ x: x, y: y + 1 });
+    stack.push({ x: x - 1, y: y });
+    stack.push({ x: x, y: y - 1 });
+  }
+  return image;
+};
