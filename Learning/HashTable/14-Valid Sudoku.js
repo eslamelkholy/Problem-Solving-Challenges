@@ -95,3 +95,6 @@ console.log(
     [".", ".", ".", ".", "8", ".", ".", "7", "9"],
   ])
 );
+
+const map = new Map();
+map.set;
