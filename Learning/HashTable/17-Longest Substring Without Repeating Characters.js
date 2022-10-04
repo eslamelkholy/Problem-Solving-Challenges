@@ -11,15 +11,41 @@ var lengthOfLongestSubstring = function (s) {
 
     subStrMap[currentSub] = currentSub.length;
     if (currentSub.length > result) result = currentSub.length;
-    currentSub = '';
+    currentSub = "";
   }
 
   return result;
 };
 
-console.log(lengthOfLongestSubstring('abcabcbb'));
-console.log(lengthOfLongestSubstring('bbbbb'));
-console.log(lengthOfLongestSubstring('pwwkew'));
-console.log(lengthOfLongestSubstring(''));
-console.log(lengthOfLongestSubstring('aab'));
-console.log(lengthOfLongestSubstring('dvdf'));
+/**
+ * @param {string} s
+ * @return {number}
+ */
+var lengthOfLongestSubstring = function (s) {
+  const charSet = new Set();
+  let left = 0;
+  let right = 0;
+  let maxSubLength = 0;
+
+  while (right < s.length) {
+    const char = s[right];
+
+    while (charSet.has(char)) {
+      charSet.delete(s[left]);
+      left++;
+    }
+
+    charSet.add(char);
+    maxSubLength = Math.max(charSet.size, maxSubLength);
+    right++;
+  }
+
+  return maxSubLength;
+};
+
+console.log(lengthOfLongestSubstring("abcabcbb"));
+console.log(lengthOfLongestSubstring("bbbbb"));
+console.log(lengthOfLongestSubstring("pwwkew"));
+console.log(lengthOfLongestSubstring(""));
+console.log(lengthOfLongestSubstring("aab"));
+console.log(lengthOfLongestSubstring("dvdf"));
