@@ -31,3 +31,46 @@ var findTarget = function (root, k) {
   dfs(root);
   return result;
 };
+
+
+/**
+ * Definition for a binary tree node.
+ * function TreeNode(val, left, right) {
+ *     this.val = (val===undefined ? 0 : val)
+ *     this.left = (left===undefined ? null : left)
+ *     this.right = (right===undefined ? null : right)
+ * }
+ */
+/**
+ * @param {TreeNode} root
+ * @param {number} k
+ * @return {boolean}
+ */
+ var findTarget = function(root, k) {
+  const nums = [];
+  const inorder = (root) => {
+      if(!root) return;
+      
+      inorder(root.left);
+      nums.push(root.val)
+      inorder(root.right);
+  }
+  inorder(root);
+  
+  let left = 0;
+  let right = nums.length - 1;
+  
+  while(left < right) {
+      const sum = nums[left] + nums[right];
+      
+      if(sum === k) return true;
+      
+      if(sum < k) {
+          left++;
+      }else {
+          right--;
+      }
+  }
+  
+  return false;
+};
