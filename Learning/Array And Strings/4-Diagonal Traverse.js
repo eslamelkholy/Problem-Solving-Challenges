@@ -16,11 +16,9 @@ var findDiagonalOrder = function (mat) {
     result.push(mat[row][col]);
 
     if (direction === "up") {
-      // Reach Top
       if (row === 0 && col < colLen - 1) {
         col++;
         direction = "down";
-        // Reach Top
       } else if (col === colLen - 1) {
         row++;
         direction = "down";
@@ -29,11 +27,9 @@ var findDiagonalOrder = function (mat) {
         col++;
       }
     } else {
-      // Reaches Down
       if (col === 0 && row < rowLen - 1) {
         row++;
         direction = "up";
-        // Reaches
       } else if (row === rowLen - 1) {
         col++;
         direction = "up";
