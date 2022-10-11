@@ -17,3 +17,13 @@ var strStr = function (haystack, needle) {
 
   return -1;
 };
+
+/**
+ * @param {string} haystack
+ * @param {string} needle
+ * @return {number}
+ */
+var strStr = function (haystack, needle) {
+  let match = haystack.indexOf(needle);
+  return match;
+};
