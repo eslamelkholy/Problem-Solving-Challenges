@@ -16,3 +16,24 @@ var removeElement = function (nums, val) {
 
   return k;
 };
+
+/**
+ * @param {number[]} nums
+ * @param {number} val
+ * @return {number}
+ */
+var removeElement = function (nums, val) {
+  let iteratorPointer = 0;
+  let movingPointer = 0;
+
+  while (iteratorPointer < nums.length) {
+    if (nums[iteratorPointer] !== val) {
+      nums[movingPointer] = nums[iteratorPointer];
+      movingPointer++;
+    }
+
+    iteratorPointer++;
+  }
+
+  return movingPointer;
+};
