@@ -8,59 +8,70 @@ class ListNode {
 class MyLinkedList {
   constructor() {
     this.size = 0;
-    this.head = null;
-    this.tail = null;
+    this.head = new ListNode(0);
   }
   /**
    * @param {number} index
    * @return {number}
    */
-  get(index) {}
+  get(index) {
+    if (index < 0 || index >= this.size) return -1;
+    let head = this.head;
+    for (let i = 0; i <= index; i++) {
+      head = head.next;
+    }
+    return head.val;
+  }
   /**
    * @param {number} val
    * @return {void}
    */
   addAtHead(val) {
-    const head = new ListNode(val);
-    if (this.head === null) {
-      this.head = head;
-    } else {
-      head.next = this.head;
-      this.head = head;
-    }
-    this.size = this.size + 1;
+    this.addAtIndex(0, val);
   }
   /**
    * @param {number} val
    * @return {void}
    */
   addAtTail(val) {
-    const tail = new ListNode(val);
-    if (this.tail === null) {
-      this.tail = tail;
-    } else {
-      this.tail.next = tail;
-      this.tail = tail;
-    }
-
-    this.size = this.size + 1;
+    this.addAtIndex(this.size, val);
   }
   /**
    * @param {number} index
    * @param {number} val
    * @return {void}
    */
-  addAtIndex(index, val) {}
+  addAtIndex(index, val) {
+    if (index > this.size) return;
+    const node = new ListNode(val);
+    let temp = this.head;
+    for (let i = 0; i < index; i++) {
+      temp = temp.next;
+    }
+
+    node.next = temp.next;
+    temp.next = node;
+    this.size++;
+  }
   /**
    * @param {number} index
    * @return {void}
    */
-  deleteAtIndex(index) {}
+  deleteAtIndex(index) {
+    if (index < 0 || index >= this.size) return -1;
+    let temp = this.head;
+    for (let i = 0; i < index; i++) {
+      temp = temp.next;
+    }
+    temp.next = temp.next.next;
+    this.size--;
+  }
 }
 
-var obj = new MyLinkedList();
-obj.addAtHead(1);
-obj.addAtTail(3);
-console.log(obj.head);
-//    obj.addAtIndex(index,val)
-//    obj.deleteAtIndex(index)
+let myLinkedList = new MyLinkedList();
+myLinkedList.addAtHead(1);
+myLinkedList.addAtTail(3);
+myLinkedList.addAtIndex(1, 2); // linked list becomes 1->2->3
+console.log(myLinkedList.get(1)); // return 2
+myLinkedList.deleteAtIndex(1); // now the linked list is 1->3
+console.log(myLinkedList.get(1));
