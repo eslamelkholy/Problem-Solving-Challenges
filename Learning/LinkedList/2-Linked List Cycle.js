@@ -52,3 +52,31 @@ var hasCycle = function (head) {
 
   return true;
 };
+
+/**
+ * Definition for singly-linked list.
+ * function ListNode(val) {
+ *     this.val = val;
+ *     this.next = null;
+ * }
+ */
+
+/**
+ * @param {ListNode} head
+ * @return {boolean}
+ */
+var hasCycle = function (head) {
+  if (!head) return false;
+
+  let slow = head;
+  let faster = head;
+
+  while (faster && faster.next) {
+    faster = faster.next.next;
+    slow = slow.next;
+
+    if (faster === slow) return true;
+  }
+
+  return false;
+};
