@@ -12,16 +12,18 @@
  */
 var removeElements = function (head, val) {
   const sentinel = new ListNode(0, head);
-  let currentNode = head;
   let prev = sentinel;
+  let current = head;
 
-  while (currentNode) {
-    if (currentNode.val === val) {
-      prev.next = currentNode.next;
+  while (current) {
+    if (current.val === val) {
+      prev.next = current.next; // Changing Prev which Point to Sentinel
     } else {
-      prev = currentNode;
+      prev = current;
     }
-    currentNode = currentNode.next;
+
+    current = current.next;
   }
-  return sentinel.next;
+
+  return sentinel.next; // Which Pointer to prev
 };
