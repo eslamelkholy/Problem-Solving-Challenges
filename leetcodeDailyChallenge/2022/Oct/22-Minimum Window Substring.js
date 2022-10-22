@@ -46,3 +46,48 @@ const compareFrequency = (map1, map2) => {
 
   return true;
 };
+
+/**
+ * @param {string} s
+ * @param {string} t
+ * @return {string}
+ */
+var minWindow = function (s, t) {
+  let charMap = {};
+  let left = 0;
+  let right = -1;
+  let current = "";
+
+  for (const char of t) {
+    charMap[char] !== undefined ? charMap[char]++ : (charMap[char] = 1);
+  }
+  let totalCount = Object.keys(charMap).length;
+
+  while (right <= s.length) {
+    if (totalCount === 0) {
+      let currentChar = s[left];
+
+      if (charMap[currentChar] !== undefined) charMap[currentChar]++;
+
+      if (charMap[currentChar] > 0) totalCount++;
+
+      let temp = s.substring(left, right + 1);
+      if (current === "") {
+        current = temp;
+      } else {
+        current = current.length < temp.length ? current : temp;
+      }
+
+      left++;
+    } else {
+      right++;
+      let currentChar = s[right];
+
+      if (charMap[currentChar] !== undefined) charMap[currentChar]--;
+
+      if (charMap[currentChar] === 0) totalCount--;
+    }
+  }
+
+  return current;
+};
