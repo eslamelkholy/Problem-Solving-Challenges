@@ -22,7 +22,6 @@ var addTwoNumbers = function (l1, l2) {
     }
 
     if (l2) {
-      a;
       sum += l2.val;
       l2 = l2.next;
     }
