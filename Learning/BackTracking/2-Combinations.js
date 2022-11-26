@@ -4,36 +4,26 @@
  * @return {number[][]}
  */
 var combine = function (n, k) {
-  const combinations = [];
-  permute(combinations, [], k, n, 1);
+  const result = [];
 
-  return combinations;
+  backtrack([], result, 1, n, k);
+
+  return result;
 };
 
-/**
- *
- * @param {number[][]} result
- * @param {number[]} currentList
- * @param {number} limit
- * @param {number} N
- * @param {number} index
- */
-const permute = (result, currentList, limit, N, index) => {
-  if (currentList.length === limit) {
-    return result.push([...currentList]);
+const backtrack = (currentCombination, result, startIndex, n, limit) => {
+  if (currentCombination.length === limit) {
+    return result.push([...currentCombination]);
   }
 
-  for (let i = index; i <= N; i++) {
-    if (currentList.includes(i)) continue;
+  for (let i = startIndex; i < n + 1; i++) {
+    currentCombination.push(i);
 
-    currentList.push(i);
+    backtrack(currentCombination, result, i + 1, n, limit);
 
-    permute(result, currentList, limit, N, i + 1);
-
-    currentList.pop();
+    currentCombination.pop();
   }
 };
-
 console.log(combine(4, 2));
 console.log(combine(1, 1));
 
