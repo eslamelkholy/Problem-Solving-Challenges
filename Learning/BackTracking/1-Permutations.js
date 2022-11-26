@@ -108,6 +108,36 @@ const permuteDFS = (currentList, nums, result) => {
   return result;
 };
 
+/**
+ * @param {number[]} nums
+ * @return {number[][]}
+ */
+var permute = function (nums) {
+  const result = [];
+
+  backtrack([], Array(nums.length).fill(false), nums, result);
+
+  return result;
+};
+
+const backtrack = (currentCombination, visited, nums, result) => {
+  if (currentCombination.length === nums.length) {
+    result.push([...currentCombination]);
+  }
+
+  for (let i = 0; i < nums.length; i++) {
+    if (visited[i] === true) continue;
+
+    visited[i] = true;
+    currentCombination.push(nums[i]);
+
+    backtrack(currentCombination, visited, nums, result);
+
+    visited[i] = false;
+    currentCombination.pop();
+  }
+};
+
 console.log(permute([1, 2, 3]));
 console.log(permute([0, 1]));
 console.log(permute([1]));
