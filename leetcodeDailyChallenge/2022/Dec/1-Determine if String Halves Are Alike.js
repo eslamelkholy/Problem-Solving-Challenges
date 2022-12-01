@@ -18,3 +18,22 @@ var halvesAreAlike = function (s) {
 
   return countFirst === countSecond;
 };
+
+/**
+ * @param {string} s
+ * @return {boolean}
+ */
+var halvesAreAlike = function (s) {
+  const middle = s.length / 2;
+  const anagramsSet = new Set(["a", "e", "i", "o", "u", "A", "E", "I", "O", "U"]);
+  let countFirst = 0;
+  let countSecond = 0;
+
+  for (let i = 0; i < s.length; i++) {
+    if (i < middle && anagramsSet.has(s[i])) countFirst++;
+
+    if (i >= middle && anagramsSet.has(s[i])) countSecond++;
+  }
+
+  return countFirst === countSecond;
+};
