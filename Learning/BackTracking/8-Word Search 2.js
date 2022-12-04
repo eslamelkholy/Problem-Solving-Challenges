@@ -50,22 +50,22 @@ const backtrack = (board, x, y, node, result) => {
   if (board[x] === undefined || board[x][y] === undefined || !node) return null;
 
   const currentWord = board[x][y];
-  board[x][y] = "#";
-  node = node[currentWord];
+  const currentNode = node[currentWord];
 
-  if (node && node.word) {
-    result.push(node.word);
-    node.word = null;
+  if (currentNode && currentNode.word) {
+    result.push(currentNode.word);
+    currentNode.word = null;
   }
 
+  board[x][y] = "#";
   for (const [dx, dy] of DIRS) {
-    const word = backtrack(board, x + dx, y + dy, node, result);
+    const word = backtrack(board, x + dx, y + dy, currentNode, result);
     if (word) return word;
   }
 
   board[x][y] = currentWord;
 
-  return null;
+  node.currentWord = null;
 };
 
 console.log(
