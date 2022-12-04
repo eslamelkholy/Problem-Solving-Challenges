@@ -32,7 +32,6 @@ var findWords = function (board, words) {
 
   for (let i = 0; i < board.length; i++) {
     for (let j = 0; j < board[i].length; j++) {
-      if (trie.root[board[i][j]] === undefined) continue;
       backtrack(board, i, j, trie.root, result);
     }
   }
@@ -47,45 +46,23 @@ const DIRS = [
 ];
 
 const backtrack = (board, x, y, node, result) => {
-  if (board[x] === undefined || board[x][y] === undefined || !node) return null;
+  if (board[x] === undefined || board[x][y] === undefined) return;
 
   const currentWord = board[x][y];
   const currentNode = node[currentWord];
+  if (currentNode === undefined) return;
 
-  if (currentNode && currentNode.word) {
+  if (currentNode.word) {
     result.push(currentNode.word);
-    currentNode.word = null;
+    currentNode.word = undefined;
   }
 
-  board[x][y] = "#";
+  board[x][y] = undefined;
+
   for (const [dx, dy] of DIRS) {
-    const word = backtrack(board, x + dx, y + dy, currentNode, result);
-    if (word) return word;
+    backtrack(board, x + dx, y + dy, currentNode, result);
   }
 
   board[x][y] = currentWord;
-
-  node.currentWord = null;
+  node.currentNode = undefined;
 };
-
-console.log(
-  findWords(
-    [
-      ["o", "a", "a", "n"],
-      ["e", "t", "a", "e"],
-      ["i", "h", "k", "r"],
-      ["i", "f", "l", "v"],
-    ],
-    ["oath", "pea", "eat", "rain"]
-  )
-);
-
-console.log(
-  findWords(
-    [
-      ["a", "b"],
-      ["c", "d"],
-    ],
-    ["abcb"]
-  )
-);
