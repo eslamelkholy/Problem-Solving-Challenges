@@ -15,18 +15,6 @@ class Trie {
 
     node.word = word;
   }
-
-  search(word) {
-    let node = this.root;
-
-    for (const char of word) {
-      if (node[char] === undefined) return null;
-
-      node = node[char];
-    }
-
-    return node;
-  }
 }
 
 /**
