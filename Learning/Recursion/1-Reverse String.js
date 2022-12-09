@@ -53,3 +53,21 @@ var reverseString = function (s, index = 0) {
 
   return reverseString(s, index + 1);
 };
+
+/**
+ * @param {character[]} s
+ * @return {void} Do not return anything, modify s in-place instead.
+ */
+var reverseString = function (s) {
+  reverse(s, 0, s.length - 1);
+};
+
+const reverse = (s, start, end) => {
+  if (start >= end) return;
+
+  const temp = s[start];
+  s[start] = s[end];
+  s[end] = temp;
+
+  return reverse(s, start + 1, end - 1);
+};
