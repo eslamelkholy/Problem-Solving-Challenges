@@ -68,3 +68,44 @@ console.log(
 );
 
 console.log(validPath(1, [], 0, 0));
+
+/**
+ * @param {number} n
+ * @param {number[][]} edges
+ * @param {number} source
+ * @param {number} destination
+ * @return {boolean}
+ */
+var validPath = function (n, edges, source, destination) {
+  const graph = buildGraph(edges);
+  const stack = [source];
+  const visited = Array(n).fill(false);
+
+  while (stack.length > 0) {
+    const currentNode = stack.pop();
+
+    if (currentNode === destination) return true;
+    if (visited[currentNode]) continue;
+
+    visited[currentNode] = true;
+
+    for (const neighbour of graph[currentNode]) {
+      stack.push(neighbour);
+    }
+  }
+
+  return false;
+};
+
+const buildGraph = (edges) => {
+  const graph = {};
+  for (const [source, dest] of edges) {
+    if (graph[source] === undefined) graph[source] = [];
+    if (graph[dest] === undefined) graph[dest] = [];
+
+    graph[source].push(dest);
+    graph[dest].push(source);
+  }
+
+  return graph;
+};
