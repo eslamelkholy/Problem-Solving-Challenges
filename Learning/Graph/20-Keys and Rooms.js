@@ -44,3 +44,21 @@ var canVisitAllRooms = function (rooms) {
   }
   return visited.size === rooms.length;
 };
+
+var canVisitAllRooms = function (rooms) {
+  const visited = new Array(rooms.length).fill(false);
+  visited[0] = true;
+  const stack = [0];
+
+  while (stack.length > 0) {
+    const currentNode = stack.pop();
+
+    for (const room of rooms[currentNode]) {
+      if (visited[room]) continue;
+      visited[room] = true;
+      stack.push(room);
+    }
+  }
+  for (const room of visited) if (!room) return false;
+  return true;
+};
