@@ -28,3 +28,19 @@ const buildGraph = (rooms) => {
   }
   return graph;
 };
+
+var canVisitAllRooms = function (rooms) {
+  const visited = new Set([0]);
+  const stack = [0];
+
+  while (stack.length > 0) {
+    const currentNode = stack.pop();
+
+    for (const room of rooms[currentNode]) {
+      if (visited.has(room)) continue;
+      visited.add(room);
+      stack.push(room);
+    }
+  }
+  return visited.size === rooms.length;
+};
