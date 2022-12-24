@@ -4,6 +4,7 @@
  */
 var sortArray = function (nums) {
   if (nums.length <= 1) return nums;
+
   const MID = nums.length / 2;
   const leftSide = sortArray(nums.slice(0, MID));
   const rightSide = sortArray(nums.slice(MID, nums.length));
@@ -11,22 +12,23 @@ var sortArray = function (nums) {
   return mergeSort(leftSide, rightSide);
 };
 
-const mergeSort = (leftList, rightList) => {
+const mergeSort = (leftArr, rightArr) => {
   let leftPointer = 0;
   let rightPointer = 0;
   const result = [];
 
-  while (leftPointer < leftList.length && rightPointer < rightList.length) {
-    if (leftList[leftPointer] < rightList[rightPointer]) {
-      result.push(leftList[leftPointer]);
+  while (leftPointer < leftArr.length && rightPointer < rightArr.length) {
+    if (leftArr[leftPointer] < rightArr[rightPointer]) {
+      result.push(leftArr[leftPointer]);
       leftPointer++;
     } else {
-      result.push(rightList[rightPointer]);
+      result.push(rightArr[rightPointer]);
       rightPointer++;
     }
   }
-  result.push(...leftList.slice(leftPointer, leftList.length));
-  result.push(...rightList.slice(rightPointer, rightList.length));
 
+  // Push the rest
+  result.push(...leftArr.slice(leftPointer, leftArr.length));
+  result.push(...rightArr.slice(rightPointer, rightArr.length));
   return result;
 };
