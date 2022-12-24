@@ -28,3 +28,26 @@ const binarySearch = (nums, target) => {
 
   return false;
 };
+
+/**
+ * @param {number[][]} matrix
+ * @param {number} target
+ * @return {boolean}
+ */
+var searchMatrix = function (matrix, target) {
+  const N = matrix.length;
+  let row = 0;
+  let col = N - 1;
+
+  while (row < N && col >= 0) {
+    if (matrix[row][col] === target) return true;
+
+    if (matrix[row][col] > target) {
+      col--;
+    } else {
+      row++;
+    }
+  }
+
+  return false;
+};
