@@ -37,7 +37,7 @@ const binarySearch = (nums, target) => {
 var searchMatrix = function (matrix, target) {
   const N = matrix.length;
   let row = 0;
-  let col = N - 1;
+  let col = matrix[0].length - 1;
 
   while (row < N && col >= 0) {
     if (matrix[row][col] === target) return true;
