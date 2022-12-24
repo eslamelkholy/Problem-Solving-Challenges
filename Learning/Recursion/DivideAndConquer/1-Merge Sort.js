@@ -2,6 +2,38 @@
  * @param {number[]} nums
  * @return {number[]}
  */
+var PesudoCode = function (nums) {
+  /**
+   * Steps
+   * 1- Check if length <= 1 return
+   * 2- get left side & right side of arr
+   * 3- Call Function recursively
+   *        leftSide =  sortArray(leftSide)
+   *        rightSide =  sortArray(rightSide)
+   * 3- call merge with left & right merge(leftSide, rightSide)
+   */
+  /**
+   * Merge Function Steps
+   * 1- Set left & right Pointers
+   * 2- While left pointer < left_list.length and right pointer < right list.length
+   * 3- if(left_list[leftCursor]) < right_list[rightCursor] {
+   *      result.push(left_list[leftCursor])
+   *      left_cursor++;
+   * 4- else {
+   *      result.push(right_list[rightCursor])
+   *      rightCursor++;
+   * }
+   *
+   * 5-
+   *      result.push(left_list[leftCursor to end])
+   *      result.push(right_list[rightCursor to end])
+   */
+};
+
+/**
+ * @param {number[]} nums
+ * @return {number[]}
+ */
 var sortArray = function (nums) {
   if (nums.length <= 1) return nums;
 
