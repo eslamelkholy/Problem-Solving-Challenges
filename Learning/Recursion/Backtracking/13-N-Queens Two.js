@@ -98,3 +98,40 @@ const canAttack = (list) => {
   }
   return false;
 };
+
+/**
+ * @param {number} n
+ * @return {number}
+ */
+var totalNQueens = function (n) {
+  const diagonals = new Set();
+  const antiDiagonals = new Set();
+  const cols = new Set();
+
+  return backtrack(0, diagonals, antiDiagonals, cols, n);
+};
+
+const backtrack = (row, diagonals, antiDiagonals, cols, size) => {
+  if (row === size) return 1;
+
+  let result = 0;
+
+  for (let col = 0; col < size; col++) {
+    const currentDiagonals = row - col;
+    const currentAntiDiagonals = row + col;
+
+    if (cols.has(col) || diagonals.has(currentDiagonals) || antiDiagonals.has(currentAntiDiagonals)) continue;
+
+    diagonals.add(currentDiagonals);
+    antiDiagonals.add(currentAntiDiagonals);
+    cols.add(col);
+
+    result += backtrack(row + 1, diagonals, antiDiagonals, cols, size);
+
+    diagonals.delete(currentDiagonals);
+    antiDiagonals.delete(currentAntiDiagonals);
+    cols.delete(col);
+  }
+
+  return result;
+};
