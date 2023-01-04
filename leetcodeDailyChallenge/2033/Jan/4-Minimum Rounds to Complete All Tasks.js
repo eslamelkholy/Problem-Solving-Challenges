@@ -21,3 +21,24 @@ var minimumRounds = function (tasks) {
 
   return rounds;
 };
+
+/**
+ * @param {number[]} tasks
+ * @return {number}
+ */
+var minimumRounds = function (tasks) {
+  const taskMap = {};
+  let rounds = 0;
+
+  for (const task of tasks) {
+    taskMap[task] ? taskMap[task]++ : (taskMap[task] = 1);
+  }
+
+  for (const key in taskMap) {
+    if (taskMap[key] < 2) return -1;
+
+    rounds += Math.floor((taskMap[key] + 2) / 3);
+  }
+
+  return rounds;
+};
