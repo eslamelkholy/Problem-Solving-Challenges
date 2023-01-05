@@ -8,9 +8,7 @@ var findMinArrowShots = function (points) {
   let xEnd = points[0][1];
 
   for (const [x, y] of points) {
-    if (x <= xEnd) {
-      continue;
-    } else {
+    if (x > xEnd) {
       xEnd = y;
       shots++;
     }
