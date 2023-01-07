@@ -31,5 +31,27 @@ const canTravel = (gas, cost, startPoint, currentPoint, prevCost) => {
   return canTravel(gas, cost, startPoint, currentPoint + 1, currentCost);
 };
 
+/**
+ * @param {number[]} gas
+ * @param {number[]} cost
+ * @return {number}
+ */
+var canCompleteCircuit = function (gas, cost) {
+  let startStation = 0;
+  let totalTank = 0;
+  let currentTank = 0;
+
+  for (let i = 0; i < gas.length; i++) {
+    currentTank += gas[i] - cost[i];
+    totalTank += gas[i] - cost[i];
+
+    if (currentTank < 0) {
+      startStation = i + 1;
+      currentTank = 0;
+    }
+  }
+  return totalTank >= 0 ? startStation : -1;
+};
+
 console.log(canCompleteCircuit([1, 2, 3, 4, 5], [3, 4, 5, 1, 2]));
 console.log(canCompleteCircuit([2, 3, 4], [3, 4, 3]));
