@@ -14,25 +14,29 @@ var minTime = function (n, edges, hasApple) {
   while (stack.length > 0) {
     const { node, edge } = stack.pop();
     if (visited.has(node)) continue;
-
-    let countDistinct = 0;
-    if (hasApple[node]) {
-      for (const ed of edge) {
-        if (edgeSet.has(ed)) continue;
-        edgeSet.add(ed);
-        countDistinct += 2;
-      }
-    }
-    timer += countDistinct;
-
     visited.add(node);
-    if (graph[node] === undefined) continue;
+
+    if (hasApple[node]) {
+      timer += countTime(edge, edgeSet);
+    }
+
     for (const neighbor of graph[node]) {
       stack.push({ node: neighbor, edge: [...edge, node + "," + neighbor] });
     }
   }
 
   return timer;
+};
+
+const countTime = (edge, edgeSet) => {
+  let countDistinct = 0;
+  for (const ed of edge) {
+    if (edgeSet.has(ed)) continue;
+
+    edgeSet.add(ed);
+    countDistinct += 2;
+  }
+  return countDistinct;
 };
 
 const buildGraph = (edges) => {
