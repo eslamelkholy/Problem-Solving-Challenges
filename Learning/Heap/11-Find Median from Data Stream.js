@@ -43,14 +43,10 @@ class MedianFinder {
   addNum(num) {
     this.maxPQ.enqueue(num); // 1- Add it to Max
 
-    this.minPQ.enqueue(this.maxPQ.front().element); // 2- Get max Value add it To Min
-
-    this.maxPQ.dequeue(); // 3- Remove it From Max
+    this.minPQ.enqueue(this.maxPQ.dequeue().element); // 2- Get max Value add it To Min &&  Remove it From Max
 
     if (this.maxPQ.size() < this.minPQ.size()) {
-      // 4-Balance Size Priority
-      this.maxPQ.enqueue(this.minPQ.front().element);
-      this.minPQ.dequeue();
+      this.maxPQ.enqueue(this.minPQ.dequeue().element); // 4-Balance Size Priority
     }
   }
   /**
