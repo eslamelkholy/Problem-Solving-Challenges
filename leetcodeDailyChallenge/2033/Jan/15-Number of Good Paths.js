@@ -155,3 +155,58 @@ console.log(
 //   )
 // );
 // console.log(numberOfGoodPaths((vals = [1]), (edges = [])));
+
+/**
+ * @param {number[]} vals
+ * @param {number[][]} edges
+ * @return {number}
+ */
+var numberOfGoodPaths = function (vals, edges) {
+  const nodeWeightMap = {};
+  const graph = buildGraph(edges);
+  let numOfPaths = 0;
+  if (edges.length === 0) return vals.length;
+
+  for (let i = 0; i < vals.length; i++) {
+    nodeWeightMap[i] = vals[i];
+  }
+
+  for (const key of Object.keys(graph)) {
+    numOfPaths += traverse(parseInt(key), graph, nodeWeightMap);
+  }
+
+  return numOfPaths / 2 + vals.length;
+};
+
+const traverse = (startNode, graph, nodeWeightMap) => {
+  const stack = [{ start: startNode, current: startNode }];
+  const visited = new Set();
+  let numOfPaths = 0;
+
+  while (stack.length > 0) {
+    const { start, current } = stack.pop();
+    if (start !== current && nodeWeightMap[start] === nodeWeightMap[current]) {
+      numOfPaths++;
+    }
+
+    visited.add(current);
+
+    for (const neighbor of graph[current] || []) {
+      if (!visited.has(neighbor) && nodeWeightMap[neighbor] <= nodeWeightMap[start]) {
+        stack.push({ start, current: neighbor });
+      }
+    }
+  }
+  return numOfPaths;
+};
+
+const buildGraph = (edges) => {
+  const graph = {};
+  for (const [x, y] of edges) {
+    if (graph[x] === undefined) graph[x] = [];
+    if (graph[y] === undefined) graph[y] = [];
+    graph[x].push(y);
+    graph[y].push(x);
+  }
+  return graph;
+};
