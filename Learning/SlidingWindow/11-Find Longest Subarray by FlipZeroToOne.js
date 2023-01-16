@@ -7,12 +7,11 @@ const findLength = (s) => {
   while (right < s.length) {
     const curr = s[right];
 
-    if (curr === "0") {
-      fliped++;
-    }
+    if (curr === "0") fliped++;
 
     while (fliped > 1) {
       if (s[left] === "0") fliped--;
+
       left++;
     }
 
@@ -20,7 +19,7 @@ const findLength = (s) => {
 
     right++;
   }
+
   return maxSubarray;
 };
-
 console.log(findLength((nums = [3, 1, 2, 7, 4, 2, 1, 1, 5]), (k = 8))); // Longest Subarray where sum <= k
