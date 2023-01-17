@@ -8,43 +8,41 @@ class Trie {
    */
   insert(word) {
     let node = this.root;
+
     for (const char of word) {
       if (node[char] === undefined) {
         node[char] = {};
       }
-
       node = node[char];
     }
-
-    node.isWord = true; // To Indicates that this is a Word
+    node.isWord = true;
   }
+
   traverse(word) {
     let node = this.root;
+
     for (const char of word) {
-      node = node[char];
-      if (node === undefined) {
+      if (node[char] === undefined) {
         return null;
       }
+      node = node[char];
     }
-
-    return node;
+    return node.isWord;
   }
+
   /**
    * @param {string} word
    * @return {boolean}
    */
   search(word) {
-    const node = this.traverse(word);
-
-    return node !== null && node.isWord === true;
+    return this.traverse(word) === true;
   }
   /**
    * @param {string} prefix
    * @return {boolean}
    */
   startsWith(prefix) {
-    const node = this.traverse(prefix);
-    return node !== null;
+    return this.traverse(prefix) !== null;
   }
 }
 
