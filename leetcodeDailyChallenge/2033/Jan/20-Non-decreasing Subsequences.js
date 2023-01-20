@@ -28,3 +28,33 @@ const backtrack = (result, index, combination, nums, memo) => {
     combination.pop(nums[i]);
   }
 };
+
+/**
+ * @param {number[]} nums
+ * @return {number[][]}
+ */
+var findSubsequences = function (nums) {
+  const result = {};
+
+  backtrack(result, 0, [], nums);
+
+  return Object.values(result);
+};
+
+const backtrack = (result, index, combination, nums) => {
+  if (index === nums.length) {
+    if (combination.length > 1) {
+      result[combination] = combination;
+    }
+    return;
+  }
+
+  if (combination.length === 0 || combination[combination.length - 1] <= nums[index]) {
+    combination.push(nums[index]);
+
+    backtrack(result, index + 1, [...combination], nums);
+
+    combination.pop();
+  }
+  backtrack(result, index + 1, [...combination], nums);
+};
