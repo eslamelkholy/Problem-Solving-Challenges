@@ -14,12 +14,10 @@ var closestMeetingNode = function (edges, node1, node2) {
   for (const key in map1) {
     if (map2[key] === undefined) continue;
 
-    if (map1[key] < minimumDistance) {
-      const max = Math.max(map1[key], map2[key]);
-      if (max < minimumDistance) {
-        result = key;
-        minimumDistance = max;
-      }
+    const max = Math.max(map1[key], map2[key]);
+    if (max < minimumDistance) {
+      result = key;
+      minimumDistance = max;
     }
   }
 
@@ -54,7 +52,6 @@ const buildGraph = (edges) => {
 
   return graph;
 };
-
 console.log(closestMeetingNode([2, 0, 0], 2, 0));
 console.log(closestMeetingNode([4, 4, 4, 5, 1, 2, 2], 1, 1));
 // console.log(closestMeetingNode([5, -1, 3, 4, 5, 6, -1, -1, 4, 3], 0, 0));
