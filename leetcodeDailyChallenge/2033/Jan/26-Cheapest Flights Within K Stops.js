@@ -8,21 +8,19 @@
  */
 var findCheapestPrice = function (n, flights, src, dst, k) {
   const graph = buildGraph(flights);
-
-  const queue = [[0, src, k + 1]];
-  const visited = new Map();
+  const queue = [[0, src, k + 1]]; // [cost, source, stops]
+  const visited = {};
 
   while (queue.length > 0) {
-    queue.sort((a, b) => a[0] - b[0]); // Sort by Cost;
-    const [cost, city, stops] = queue.shift();
-    visited.set(city, stops);
+    queue.sort((a, b) => a[0] - b[0]); // Sort By Priority
+    const [cost, source, stops] = queue.shift();
+    visited[source] = stops;
 
-    if (city === dst) return cost;
+    if (source === dst) return cost;
+    if (stops <= 0 || graph[source] === undefined) continue;
 
-    if (stops <= 0 || graph[city] === undefined) continue;
-
-    for (const [nextCity, nextCost] of graph[city]) {
-      if (visited.has(nextCity) && visited.get(nextCity) >= stops - 1) continue;
+    for (const [nextCity, nextCost] of graph[source]) {
+      if (visited[nextCity] !== undefined && visited[nextCity] >= stops - 1) continue; // Has Next city and validate Stops
 
       queue.push([cost + nextCost, nextCity, stops - 1]);
     }
@@ -33,10 +31,10 @@ var findCheapestPrice = function (n, flights, src, dst, k) {
 
 const buildGraph = (flights) => {
   const graph = {};
-  for (const [start, end, cost] of flights) {
-    if (graph[start] === undefined) graph[start] = [];
+  for (const [from, to, cost] of flights) {
+    if (graph[from] === undefined) graph[from] = [];
 
-    graph[start].push([end, cost]);
+    graph[from].push([to, cost]);
   }
   return graph;
 };
