@@ -45,10 +45,7 @@ class MapSum {
     while (stack.length > 0) {
       const curr = stack.pop();
 
-      if (typeof curr !== "object") {
-        sumPrefix += curr;
-        continue;
-      }
+      if (typeof curr !== "object") sumPrefix += curr;
 
       for (const key in curr) {
         stack.push(curr[key]);
