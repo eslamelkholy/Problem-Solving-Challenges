@@ -1,32 +1,27 @@
 class Trie {
   constructor() {
     this.root = {};
-    this.SKIPPED_CHAR = ".";
+    this.SKIP_CHAR = ".";
   }
+
   insert(word) {
     let node = this.root;
-
     for (const char of word) {
-      if (node[char] === undefined) {
-        node[char] = {};
-      }
+      if (node[char] === undefined) node[char] = {};
 
       node = node[char];
     }
-
     node.isWord = true;
   }
   search(word, node = this.root) {
     for (let i = 0; i < word.length; i++) {
       const char = word[i];
 
-      if (char === this.SKIPPED_CHAR) {
+      if (char === this.SKIP_CHAR) {
         const nextChar = word.substring(i + 1, word.length);
         for (const key in node) {
           if (this.search(nextChar, node[key])) return true;
         }
-
-        return false;
       }
 
       if (node[char] === undefined) return null;
@@ -54,27 +49,15 @@ class WordDictionary {
    * @return {boolean}
    */
   search(word) {
-    const searchResult = this.trie.search(word);
-
-    console.log(searchResult === true);
-    return searchResult === true;
+    return this.trie.search(word) === true;
   }
 }
 
 const wordDictionary = new WordDictionary();
-
 wordDictionary.addWord("bad");
 wordDictionary.addWord("dad");
 wordDictionary.addWord("mad");
-wordDictionary.search("bad"); // return True
 wordDictionary.search("pad"); // return False
+wordDictionary.search("bad"); // return True
 wordDictionary.search(".ad"); // return True
 wordDictionary.search("b.."); // return True
-wordDictionary.search("b.s"); // return False
-
-/**
- * Your WordDictionary object will be instantiated and called as such:
- * var obj = new WordDictionary()
- * obj.addWord(word)
- * var param_2 = obj.search(word)
- */
