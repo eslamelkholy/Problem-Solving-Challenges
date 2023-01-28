@@ -1,43 +1,59 @@
-class MapSum {
+class Trie {
   constructor() {
     this.root = {};
-    this.map = {};
   }
-
   insert(word, val) {
-    const delta = this.map[word] !== undefined ? -this.map[word] : 0;
-    this.map[word] = val;
-
     let node = this.root;
-
     for (const char of word) {
-      if (node[char] !== undefined) {
-        node[char] = { ...node[char], val: node[char].val + delta + val };
-      } else {
-        node[char] = { val };
-      }
+      if (node[char] === undefined) node[char] = {};
 
       node = node[char];
     }
-
-    node.isWord = true;
+    node.val = val;
   }
-
   traverse(word) {
     let node = this.root;
-
     for (const char of word) {
-      node = node[char];
-      if (node === undefined) return null;
-    }
+      if (node[char] === undefined) return null;
 
+      node = node[char];
+    }
     return node;
   }
+}
+class MapSum {
+  constructor() {
+    this.trie = new Trie();
+  }
+  /**
+   * @param {string} key
+   * @param {number} val
+   * @return {void}
+   */
+  insert(key, val) {
+    this.trie.insert(key, val);
+  }
+  /**
+   * @param {string} prefix
+   * @return {number}
+   */
+  sum(prefix) {
+    const prefixVals = this.trie.traverse(prefix);
+    const stack = [prefixVals];
+    let sumPrefix = 0;
 
-  sum(word) {
-    const node = this.traverse(word);
-    if (node === null) return 0;
+    while (stack.length > 0) {
+      const curr = stack.pop();
 
-    return node.val;
+      if (typeof curr !== "object") {
+        sumPrefix += curr;
+        continue;
+      }
+
+      for (const key in curr) {
+        stack.push(curr[key]);
+      }
+    }
+    return sumPrefix;
   }
 }
