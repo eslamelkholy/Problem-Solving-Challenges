@@ -2,27 +2,25 @@ class Trie {
   constructor() {
     this.root = {};
   }
+
   insert(word) {
     let node = this.root;
     for (const char of word) {
-      if (node[char] === undefined) {
-        node[char] = {};
-      }
+      if (node[char] === undefined) node[char] = {};
+
       node = node[char];
     }
     node.word = word;
-    node.isWord = true;
   }
-
   search(word) {
     let node = this.root;
     for (const char of word) {
-      if (node.word !== undefined) return node;
-      if (node[char] === undefined) return null;
+      if (node[char] === undefined) return undefined;
+      if (node[char]["word"] !== undefined) return node[char]["word"];
 
       node = node[char];
     }
-    return node;
+    return node.word;
   }
 }
 
@@ -33,19 +31,20 @@ class Trie {
  */
 var replaceWords = function (dictionary, sentence) {
   const trie = new Trie();
-  const words = sentence.split(" ");
-  const result = [];
-
   for (const word of dictionary) {
     trie.insert(word);
   }
 
-  for (const word of words) {
-    const node = trie.search(word);
-    node !== null && node.word !== undefined ? result.push(node.word) : result.push(word);
+  const words = sentence.split(" ");
+  for (let i = 0; i < words.length; i++) {
+    const word = words[i];
+    const root = trie.search(word);
+    if (root === undefined) continue;
+
+    words[i] = root;
   }
 
-  return result.join(" ");
+  return words.join(" ");
 };
 
 console.log(replaceWords(["cat", "bat", "rat"], "the cattle was rattled by the battery"));
