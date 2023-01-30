@@ -32,7 +32,7 @@ const calculate = (n, memo) => {
  * @return {number}
  */
 var tribonacci = function (n) {
-  const dp = new Array(n).fill(0);
+  const dp = new Array(n);
   dp[0] = 0;
   dp[1] = 1;
   dp[2] = 1;
