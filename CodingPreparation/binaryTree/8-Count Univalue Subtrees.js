@@ -13,14 +13,15 @@
 var countUnivalSubtrees = function (root) {
   let count = 0;
 
-  const findUnival = (root) => {
+  const dfs = (root) => {
     if (!root) return true;
 
-    const left = findUnival(root.left);
-    const right = findUnival(root.right);
+    const left = dfs(root.left);
+    const right = dfs(root.right);
 
     if (left && right) {
       if (root.left && root.left.val !== root.val) return false;
+
       if (root.right && root.right.val !== root.val) return false;
 
       count++;
@@ -29,7 +30,8 @@ var countUnivalSubtrees = function (root) {
 
     return false;
   };
-  findUnival(root);
+
+  dfs(root);
 
   return count;
 };
