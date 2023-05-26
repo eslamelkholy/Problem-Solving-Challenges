@@ -2,7 +2,7 @@
  * @param {number[]} nums
  * @return {number}
  */
-var findMaxConsecutiveOnes = function (nums) {
+var findMaxConsecutiveOnesV1 = function (nums) {
   let slowPointer = 0;
   let maxOnes = 0;
 
@@ -17,6 +17,29 @@ var findMaxConsecutiveOnes = function (nums) {
       maxOnes = Math.max(maxOnes, fastPointer - slowPointer);
     }
     slowPointer++;
+  }
+
+  return maxOnes;
+};
+
+/**
+ * @param {number[]} nums
+ * @return {number}
+ */
+var findMaxConsecutiveOnes = function (nums) {
+  let count = 0;
+  let maxOnes = 0;
+
+  for (let i = 0; i < nums.length; i++) {
+    const num = nums[i];
+
+    if (num === 1) {
+      count++;
+    } else {
+      count = 0;
+    }
+
+    maxOnes = Math.max(maxOnes, count);
   }
 
   return maxOnes;
