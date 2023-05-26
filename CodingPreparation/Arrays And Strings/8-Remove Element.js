@@ -24,5 +24,26 @@ var removeElement = function (nums, val) {
   return nums;
 };
 
+/**
+ * @param {number[]} nums
+ * @param {number} val
+ * @return {number}
+ */
+var removeElement = function (nums, val) {
+  let iteratorPointer = 0;
+  let movingPointer = 0;
+
+  while (iteratorPointer < nums.length) {
+    if (nums[iteratorPointer] !== val) {
+      nums[movingPointer] = nums[iteratorPointer];
+      movingPointer++;
+    }
+
+    iteratorPointer++;
+  }
+
+  return movingPointer;
+};
+
 console.log(removeElement((nums = [3, 2, 2, 3]), (val = 3)));
 console.log(removeElement((nums = [0, 1, 2, 2, 3, 0, 4, 2]), (val = 2)));
