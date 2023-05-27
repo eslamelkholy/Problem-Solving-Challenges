@@ -6,23 +6,23 @@
 var minSubArrayLen = function (target, nums) {
   let left = 0;
   let right = 0;
-  let sum = 0;
-  let minSubarr = Number.MAX_SAFE_INTEGER;
+  let windowSum = 0;
+  let minWindowSize = Number.MAX_SAFE_INTEGER;
 
   while (right < nums.length) {
-    sum += nums[right];
+    windowSum += nums[right];
 
-    while (sum >= target) {
-      minSubarr = Math.min(minSubarr, right - left + 1);
-      sum -= nums[left];
+    while (windowSum >= target) {
+      minWindowSize = Math.min(minWindowSize, right - left + 1);
 
+      windowSum -= nums[left];
       left++;
     }
 
     right++;
   }
 
-  return minSubarr === Number.MAX_SAFE_INTEGER ? 0 : minSubarr;
+  return minWindowSize === Number.MAX_SAFE_INTEGER ? 0 : minWindowSize;
 };
 
 console.log(minSubArrayLen((target = 7), (nums = [2, 3, 1, 2, 4, 3])));
