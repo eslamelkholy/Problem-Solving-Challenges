@@ -9,19 +9,19 @@ var solveSudoku = function (board) {
 };
 
 const backtrack = (board) => {
-  for (let i = 0; i < board.length; i++) {
-    for (let j = 0; j < board[i][j].length; j++) {
-      if (board[i][j] !== SKIPPED_CHAR) continue;
+  for (let row = 0; row < board.length; row++) {
+    for (let col = 0; col < board[row].length; col++) {
+      if (board[row][col] !== SKIPPED_CHAR) continue;
 
-      for (let k = 1; k <= BOARD_LENGTH; k++) {
-        if (isNumberValid(i, j, k, board)) {
-          board[i][j] = k;
+      for (let i = 1; i < BOARD_LENGTH + 1; i++) {
+        if (isValidNumber(row, col, i + "", board)) {
+          board[row][col] = i + "";
 
           if (backtrack(board)) return true;
-          board[i][j] = SKIPPED_CHAR;
+
+          board[row][col] = SKIPPED_CHAR;
         }
       }
-
       return false;
     }
   }
@@ -29,7 +29,7 @@ const backtrack = (board) => {
   return true;
 };
 
-const isNumberValid = (row, col, number, board) => {
+const isValidNumber = (row, col, number, board) => {
   const rowDiff = Math.floor(row / 3) * 3;
   const colDiff = Math.floor(col / 3) * 3;
 
@@ -37,8 +37,10 @@ const isNumberValid = (row, col, number, board) => {
     if (board[row][i] === number) return false;
     if (board[i][col] === number) return false;
 
-    if (board[rowDiff + Math.floor(i / 3)][colDiff + (i % 3)] === number) return false; // 3x3 Block
+    if (board[rowDiff + Math.floor(i / 3)][colDiff + Math.floor(i % 3)] === number) return false;
   }
+
+  return true;
 };
 
 console.log(
