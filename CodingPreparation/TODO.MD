@@ -1,6 +1,6 @@
 # TODO
 
-- Linkedlist
+- Hashtables
 - Strings and Arrays
 - Recursion
 - Binary Tree
