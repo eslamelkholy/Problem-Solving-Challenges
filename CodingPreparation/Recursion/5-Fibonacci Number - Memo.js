@@ -24,4 +24,19 @@ const calculate = (n, memo) => {
   return (memo[n] = calculate(n - 1, memo) + calculate(n - 2, memo));
 };
 
-console.log(fibmemo(5));
+/**
+ * @param {number} n
+ * @return {number}
+ */
+var fibDP = function (n) {
+  const dp = new Array(n).fill(1);
+  if (n < 2) return n;
+
+  for (let i = 2; i < n; i++) {
+    dp[i] = dp[i - 1] + dp[i - 2];
+  }
+
+  return dp[n - 1];
+};
+
+console.log(fibDP(10));
