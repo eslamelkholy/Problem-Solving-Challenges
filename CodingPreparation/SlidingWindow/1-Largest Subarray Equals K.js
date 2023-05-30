@@ -26,3 +26,5 @@ const largestSubarray = (nums, k) => {
 };
 
 console.log(largestSubarray((nums = [3, 1, 2, 7, 4, 2, 1, 1, 5]), (k = 8)));
+
+// https://leetcode.com/explore/featured/card/leetcodes-interview-crash-course-data-structures-and-algorithms/703/arraystrings/4502/
