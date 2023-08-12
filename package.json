@@ -1,0 +1,5 @@
+{
+  "dependencies": {
+    "@datastructures-js/priority-queue": "4.1"
+  }
+}
