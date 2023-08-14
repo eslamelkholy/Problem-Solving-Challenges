@@ -15,4 +15,4 @@ as soon as it Determine that the candidate cannot Lead to **Valid Solution** so 
 
 as it's a tree of Solutions and detemine if this solution is Valid or Not
 
-![Backtrack](public/backtracking1.png)
+![Backtrack](/public/backtracking1.png)
