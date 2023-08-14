@@ -5,22 +5,25 @@
  */
 var combine = function (n, k) {
   const result = [];
+  const memo = new Array(k).fill(false);
 
-  const backtrack = (currentCombination, index) => {
+  const backtrack = (currentCombination, index, memo) => {
     if (currentCombination.length === k) return result.push(currentCombination);
 
     for (let i = index; i <= n; i++) {
-      if (currentCombination.includes(i)) continue;
+      if (memo[i]) continue;
 
       currentCombination.push(i);
+      memo[i] = true;
 
-      backtrack([...currentCombination], i + 1);
+      backtrack([...currentCombination], i + 1, memo);
 
       currentCombination.pop(i);
+      memo[i] = false;
     }
   };
 
-  backtrack([], 1);
+  backtrack([], 1, memo);
 
   return result;
 };
