@@ -5,7 +5,7 @@ const { MaxPriorityQueue } = require("@datastructures-js/priority-queue");
  * @return {number[]}
  */
 var topKFrequent = function (nums, k) {
-  const maxFreqPQ = new MaxPriorityQueue({ priority: (element) => element });
+  const maxPQ = new MaxPriorityQueue({ priority: (element) => element });
   const numMap = {};
   const result = [];
 
@@ -14,11 +14,11 @@ var topKFrequent = function (nums, k) {
   }
 
   for (const key in numMap) {
-    maxFreqPQ.enqueue(key, numMap[key]);
+    maxPQ.enqueue(key, numMap[key]); // Key and Priority
   }
 
   for (let i = 0; i < k; i++) {
-    result.push(Number(maxFreqPQ.dequeue().element));
+    result.push(maxPQ.dequeue().element);
   }
 
   return result;
