@@ -37,7 +37,7 @@ var findRelativeRanks = function (score) {
  * @return {string[]}
  */
 var findRelativeRanks = function (score) {
-  const maxPQ = new MaxPriorityQueue({ priority: (diff) => diff.priority });
+  const maxPQ = new MaxPriorityQueue({ priority: (diff) => diff.priority }); // Telling this to Sort the queue based on Priority
   const output = new Array(score.length);
 
   for (let i = 0; i < score.length; i++) {
