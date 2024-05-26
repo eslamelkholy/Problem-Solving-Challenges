@@ -7,8 +7,6 @@ var reverseWords = function (s) {
   let left = 0;
   let right = arr.length - 1;
 
-  console.log(arr);
-
   while (left < right + 1) {
     const temp = arr[left];
 
