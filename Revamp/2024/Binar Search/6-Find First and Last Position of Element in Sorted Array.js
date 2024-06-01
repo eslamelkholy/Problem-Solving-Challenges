@@ -6,14 +6,9 @@
 var searchRange = function (nums, target) {
   let left = 0;
   let right = nums.length - 1;
-  let found = false;
 
   while (left <= right) {
     const mid = Math.floor((left + right) / 2);
-
-    if (nums[mid] === target) {
-      found = true;
-    }
 
     if (nums[mid] < target) {
       left = mid + 1;
@@ -21,13 +16,12 @@ var searchRange = function (nums, target) {
       right = mid - 1;
     }
   }
-  if (!found) return [-1, -1];
+  if (nums[left] !== target) return [-1, -1];
 
   let end = left;
   for (let i = left; i < nums.length; i++) {
-    if (nums[i] !== target) {
-      break;
-    }
+    if (nums[i] !== target) break;
+
     end = i;
   }
 
