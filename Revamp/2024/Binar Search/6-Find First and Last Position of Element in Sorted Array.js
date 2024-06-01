@@ -26,7 +26,6 @@ var searchRange = function (nums, target) {
   let end = left;
   for (let i = left; i < nums.length; i++) {
     if (nums[i] !== target) {
-      end = i - 1;
       break;
     }
     end = i;
