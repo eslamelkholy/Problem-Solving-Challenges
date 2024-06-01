@@ -13,11 +13,12 @@
  * @return {Node}
  */
 var connect = function (root) {
-  if (!root) return null;
+  if (!root) return root;
   const queue = [root];
 
   while (queue.length > 0) {
-    const N = queue.length; // Current size of N
+    const N = queue.length;
+
     for (let i = 0; i < N; i++) {
       const currentNode = queue.shift();
 
