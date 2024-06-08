@@ -4,24 +4,25 @@
  * @return {boolean}
  */
 var canFinish = function (numCourses, prerequisites) {
-  const graph = buildGraph(prerequisites, numCourses);
   const visited = new Set();
   const seeing = new Set();
+  const graph = buildGraph(numCourses, prerequisites);
 
   for (let i = 0; i < numCourses; i++) {
-    if (!dfs(seeing, visited, i + "", graph)) return false;
+    if (!dfs(graph, visited, seeing, i + "")) return false;
   }
 
   return true;
 };
 
-const dfs = (seeing, visited, node, graph) => {
-  if (visited.has(node)) return true;
+const dfs = (graph, visited, seeing, node) => {
   if (seeing.has(node)) return false;
+  if (visited.has(node)) return true;
+
   seeing.add(node);
 
   for (const currentNode of graph[node]) {
-    if (!dfs(seeing, visited, currentNode, graph)) return false;
+    if (!dfs(graph, visited, seeing, currentNode)) return false;
   }
 
   seeing.delete(node);
@@ -30,12 +31,14 @@ const dfs = (seeing, visited, node, graph) => {
   return true;
 };
 
-const buildGraph = (edges, numCourses) => {
-  const graph = [...Array(numCourses)].map((r) => []);
+const buildGraph = (N, edges) => {
+  const graph = {};
+  for (let i = 0; i < N; i++) graph[i] = [];
 
-  for (const [a, b] of edges) {
-    graph[a].push(b);
+  for (const [x, y] of edges) {
+    graph[x].push(y);
   }
+
   return graph;
 };
 
