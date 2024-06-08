@@ -5,6 +5,31 @@
 var uniquePathsWithObstacles = function (obstacleGrid) {
   const N = obstacleGrid.length;
   const M = obstacleGrid[0].length;
+  let uniquePaths = 0;
+
+  const dfs = (obstacleGrid, x, y) => {
+    if (obstacleGrid[x] === undefined || obstacleGrid[x][y] === undefined || obstacleGrid[x][y] === 1) return;
+
+    if (x === N - 1 && y === M - 1) {
+      return uniquePaths++;
+    }
+
+    dfs(obstacleGrid, x + 1, y);
+    dfs(obstacleGrid, x, y + 1);
+  };
+
+  dfs(obstacleGrid, 0, 0, uniquePaths);
+
+  return uniquePaths;
+};
+
+/**
+ * @param {number[][]} obstacleGrid
+ * @return {number}
+ */
+var uniquePathsWithObstacles = function (obstacleGrid) {
+  const N = obstacleGrid.length;
+  const M = obstacleGrid[0].length;
   const memo = new Array(N).fill(0).map((v) => new Array(M).fill(0));
 
   const traverse = (obstacleGrid, x, y) => {
