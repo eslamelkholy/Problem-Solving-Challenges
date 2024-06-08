@@ -9,7 +9,7 @@ var canFinish = function (numCourses, prerequisites) {
   const graph = buildGraph(numCourses, prerequisites);
 
   for (let i = 0; i < numCourses; i++) {
-    if (!dfs(graph, visited, seeing, i + "")) return false;
+    if (!dfs(graph, visited, seeing, i)) return false;
   }
 
   return true;
@@ -49,6 +49,18 @@ console.log(
     (prerequisites = [
       [1, 0],
       [0, 1],
+    ])
+  )
+);
+
+console.log(
+  canFinish(
+    (numCourses = 4),
+    (prerequisites = [
+      [1, 0],
+      [2, 0],
+      [3, 1],
+      [3, 2],
     ])
   )
 );
