@@ -27,3 +27,5 @@ var compress = function (chars) {
 
 console.log(compress((chars = ["a", "a", "b", "b", "c", "c", "c"])));
 console.log(compress((chars = ["a", "a", "b", "c", "c", "c", "c", "c", "a", "a", "a"])));
+
+// https://leetcode.com/problems/string-compression/description/
