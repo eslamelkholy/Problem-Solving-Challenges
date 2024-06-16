@@ -23,3 +23,7 @@ var isOneEditDistance = function (s, t) {
 
   return NS + 1 === NT;
 };
+
+console.log(isOneEditDistance((s = "pales"), (t = "pale")));
+
+// https://leetcode.com/problems/one-edit-distance/description/
