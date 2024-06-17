@@ -30,3 +30,5 @@ var deleteDuplicatesUnsorted = function (head) {
   }
   return prev.next;
 };
+
+//https://leetcode.com/problems/remove-duplicates-from-an-unsorted-linked-list/
