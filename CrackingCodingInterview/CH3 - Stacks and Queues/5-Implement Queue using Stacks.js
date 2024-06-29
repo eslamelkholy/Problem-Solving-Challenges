@@ -1,6 +1,6 @@
 class MyQueue {
   constructor() {
-    this.stack1 = [];
+    this.stack = [];
   }
   /**
    * @param {number} x
