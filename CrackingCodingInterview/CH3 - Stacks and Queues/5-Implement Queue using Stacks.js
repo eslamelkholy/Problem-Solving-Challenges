@@ -1,34 +1,40 @@
 class MyQueue {
   constructor() {
-    this.stack = [];
+    this.stack1 = [];
+    this.stack2 = [];
   }
   /**
    * @param {number} x
    * @return {void}
    */
   push(x) {
-    this.stack.push(x);
+    while (this.stack1.length > 0) {
+      this.stack2.push(this.stack1.pop());
+    }
+
+    this.stack1.push(x);
+
+    while (this.stack2.length > 0) {
+      this.stack1.push(this.stack2.pop());
+    }
   }
   /**
    * @return {number}
    */
   pop() {
-    const element = this.stack[0];
-    this.stack.splice(0, 1);
-
-    return element;
+    return this.stack1.pop();
   }
   /**
    * @return {number}
    */
   peek() {
-    return this.stack[0];
+    return this.stack1[this.stack1.length - 1];
   }
   /**
    * @return {boolean}
    */
   empty() {
-    return this.stack.length === 0;
+    return this.stack1.length === 0;
   }
 }
 
