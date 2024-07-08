@@ -41,3 +41,39 @@ var isSubtree = function (root, subRoot) {
 
   return result;
 };
+
+/**
+ * Definition for a binary tree node.
+ * function TreeNode(val, left, right) {
+ *     this.val = (val===undefined ? 0 : val)
+ *     this.left = (left===undefined ? null : left)
+ *     this.right = (right===undefined ? null : right)
+ * }
+ */
+/**
+ * @param {TreeNode} root
+ * @param {TreeNode} subRoot
+ * @return {boolean}
+ */
+var isSubtree = function (root, subRoot) {
+  let arr1 = [];
+  let arr2 = [];
+
+  const dfs = (root, arr) => {
+    if (!root) {
+      return arr.push("#");
+    }
+
+    arr.push("X" + root.val);
+
+    dfs(root.left, arr);
+    dfs(root.right, arr);
+  };
+  dfs(root, arr1);
+  dfs(subRoot, arr2);
+
+  const s1 = arr1.join(",");
+  const s2 = arr2.join(",");
+
+  return s1.indexOf(s2) !== -1;
+};
