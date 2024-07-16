@@ -36,19 +36,14 @@ const findPath = (root, target, path) => {
   }
 
   path.push("L");
-  if (findPath(root.left, target, path)) {
-    return true;
-  }
-  path.pop();
+  if (findPath(root.left, target, path)) return true;
 
+  path.pop();
   path.push("R");
 
-  if (findPath(root.right, target, path)) {
-    return true;
-  }
+  if (findPath(root.right, target, path)) return true;
 
   path.pop();
-
   return false;
 };
 
