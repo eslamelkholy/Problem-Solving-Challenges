@@ -60,3 +60,51 @@ const findLCA = (root, startValue, destValue) => {
 
   return left + right + mid > 0;
 };
+
+/**
+ * Definition for a binary tree node.
+ * function TreeNode(val, left, right) {
+ *     this.val = (val===undefined ? 0 : val)
+ *     this.left = (left===undefined ? null : left)
+ *     this.right = (right===undefined ? null : right)
+ * }
+ */
+/**
+ * @param {TreeNode} root
+ * @param {number} startValue
+ * @param {number} destValue
+ * @return {string}
+ */
+let lowestCommonAncestor = null;
+var getDirections = function (root, startValue, destValue) {
+  findLCA(root, startValue, destValue);
+
+  const pathToStart = findPath(lowestCommonAncestor, startValue);
+  const pathToDest = findPath(lowestCommonAncestor, destValue);
+
+  return "U".repeat(pathToStart.length) + pathToDest;
+};
+
+const findPath = (root, target, path = "") => {
+  if (!root) return "";
+
+  if (root.val === target) {
+    return path;
+  }
+
+  return findPath(root.left, target, path + "L") + findPath(root.right, target, path + "R");
+};
+
+const findLCA = (root, startValue, destValue) => {
+  if (!root) return false;
+  const left = findLCA(root.left, startValue, destValue) ? 1 : 0;
+  const right = findLCA(root.right, startValue, destValue) ? 1 : 0;
+
+  const mid = root.val === startValue || root.val === destValue ? 1 : 0;
+
+  if (left + right + mid >= 2) {
+    lowestCommonAncestor = root;
+  }
+
+  return left + right + mid > 0;
+};
