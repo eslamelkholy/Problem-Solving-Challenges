@@ -1,3 +1,4 @@
+const { MinPriorityQueue } = require("@datastructures-js/priority-queue");
 /**
  * @param {number} n
  * @param {number[][]} edges
@@ -21,23 +22,20 @@ var findTheCity = function (n, edges, distanceThreshold) {
 };
 
 const bfs = (node, graph, distanceThreshold) => {
-  const queue = [[node, 0, new Set()]];
+  const minPQ = new MinPriorityQueue({ priority: (val) => val.distance });
+  minPQ.enqueue({ currentNode: node, distance: 0 });
+  const visited = new Set();
   let numberOfVisistedNodes = 0;
-  const markedVisited = new Set();
 
-  while (queue.length > 0) {
-    const [currentNode, distance, visited] = queue.shift();
+  while (minPQ.size() > 0) {
+    const { currentNode, distance } = minPQ.dequeue().element;
 
     if (distance > distanceThreshold || visited.has(currentNode)) continue;
-
-    if (!markedVisited.has(currentNode)) {
-      numberOfVisistedNodes++;
-    }
     visited.add(currentNode);
-    markedVisited.add(currentNode);
+    numberOfVisistedNodes++;
 
     for (const neighbor in graph[currentNode]) {
-      queue.push([neighbor, distance + graph[currentNode][neighbor], new Set(visited)]);
+      minPQ.enqueue({ currentNode: neighbor, distance: distance + graph[currentNode][neighbor] });
     }
   }
 
