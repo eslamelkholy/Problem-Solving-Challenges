@@ -30,3 +30,27 @@ var minimumDeletions = function (s) {
 
   return minDeletion;
 };
+
+/**
+ * @param {string} s
+ * @return {number}
+ */
+var minimumDeletions = function (s) {
+  const N = s.length;
+  const countA = new Array(N);
+  let aCount = 0;
+  let bCount = 0;
+  let minDeletion = N;
+
+  for (let i = N - 1; i >= 0; i--) {
+    countA[i] = aCount;
+    if (s[i] === "a") aCount++;
+  }
+
+  for (let i = 0; i < N; i++) {
+    minDeletion = Math.min(minDeletion, countA[i] + bCount);
+    if (s[i] === "b") bCount++;
+  }
+
+  return minDeletion;
+};
