@@ -16,3 +16,31 @@ var strStr = function (haystack, needle) {
 
   return -1;
 };
+
+/**
+ * @param {string} haystack
+ * @param {string} needle
+ * @return {number}
+ */
+var strStr = function (haystack, needle) {
+  let left = 0;
+  let right = 0;
+  let currentChar = "";
+
+  while (right < haystack.length) {
+    const char = haystack[right];
+
+    currentChar += char;
+
+    if (currentChar.length === needle.length) {
+      if (currentChar === needle) return left;
+
+      left++;
+      currentChar = currentChar.slice(1);
+    }
+
+    right++;
+  }
+
+  return -1;
+};
