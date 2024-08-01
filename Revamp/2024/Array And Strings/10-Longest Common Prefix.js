@@ -16,3 +16,29 @@ var longestCommonPrefix = function (strs) {
 
   return common;
 };
+
+/**
+ * @param {string[]} strs
+ * @return {string}
+ */
+var longestCommonPrefix = function (strs) {
+  let prefixMap = {};
+  let result = "";
+
+  for (const str of strs) {
+    let currentPrefix = "";
+    for (const char of str) {
+      currentPrefix += char;
+
+      prefixMap[currentPrefix]++ || (prefixMap[currentPrefix] = 1);
+    }
+  }
+
+  for (const key in prefixMap) {
+    if (prefixMap[key] === strs.length) {
+      result = key;
+    }
+  }
+
+  return result;
+};
