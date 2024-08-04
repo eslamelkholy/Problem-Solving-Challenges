@@ -3,17 +3,21 @@
  * @return {void} Do not return anything, modify board in-place instead.
  */
 var solve = function (board) {
-  for (let i = 0; i < board.length; i++) {
-    for (let j = 0; j < board[i].length; j++) {
-      const isOnBorder = i === 0 || j === 0 || i === board.length - 1 || j === board[0].length - 1;
+  const N = board.length;
+  const M = board[0].length;
+
+  for (let i = 0; i < N; i++) {
+    for (let j = 0; j < M; j++) {
+      const isOnBorder = i === 0 || j === 0 || i === N - 1 || j === M - 1;
+
       if (board[i][j] === "O" && isOnBorder) {
-        dfs(i, j, board);
+        markAsVisited(board, i, j);
       }
     }
   }
 
-  for (let i = 0; i < board.length; i++) {
-    for (let j = 0; j < board[i].length; j++) {
+  for (let i = 0; i < N; i++) {
+    for (let j = 0; j < M; j++) {
       if (board[i][j] === "visited") {
         board[i][j] = "O";
       } else {
@@ -23,13 +27,13 @@ var solve = function (board) {
   }
 };
 
-const dfs = (x, y, board) => {
-  if (board[x] === undefined || board[x][y] === undefined || board[x][y] === "visited" || board[x][y] === "X") return;
+const markAsVisited = (board, x, y) => {
+  if (board[x] === undefined || board[x][y] === undefined || board[x][y] === "X" || board[x][y] === "visited") return;
 
   board[x][y] = "visited";
 
   for (const [dx, dy] of DIRS) {
-    dfs(x + dx, y + dy, board);
+    markAsVisited(board, x + dx, y + dy);
   }
 };
 
@@ -39,30 +43,3 @@ const DIRS = [
   [0, 1],
   [0, -1],
 ];
-
-// console.log(
-//   solve(
-//     (board = [
-//       ["O", "O"],
-//       ["O", "O"],
-//     ])
-//   )
-// );
-
-// console.log(
-//   solve(
-//     (board = [
-//       ["O", "O", "O"],
-//       ["O", "O", "O"],
-//       ["O", "O", "O"],
-//     ])
-//   )
-// );
-
-console.log(
-  solve([
-    ["X", "O", "X"],
-    ["X", "O", "X"],
-    ["X", "O", "X"],
-  ])
-);
