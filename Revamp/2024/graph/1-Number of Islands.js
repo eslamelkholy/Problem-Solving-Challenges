@@ -3,27 +3,25 @@
  * @return {number}
  */
 var numIslands = function (grid) {
-  let count = 0;
+  let islands = 0;
   for (let i = 0; i < grid.length; i++) {
     for (let j = 0; j < grid[i].length; j++) {
-      if (grid[i][j] === "0") continue;
-      count += dfs(grid, i, j);
+      if (dfs(grid, i, j)) islands++;
     }
   }
 
-  return count;
+  return islands;
 };
 
 const dfs = (grid, x, y) => {
-  if (grid[x] === undefined || grid[x][y] === undefined || grid[x][y] === "0") return 0;
-
+  if (grid[x] === undefined || grid[x][y] === undefined || grid[x][y] === "0") return false;
   grid[x][y] = "0";
 
   for (const [dx, dy] of DIRS) {
     dfs(grid, x + dx, y + dy);
   }
 
-  return 1;
+  return true;
 };
 
 const DIRS = [
