@@ -6,8 +6,7 @@ var minimumPushes = function (word) {
   const freqMap = {};
   let maxPQ = new MaxPriorityQueue();
   let totalPushes = 0;
-  let rounds = 1;
-  let currentRound = 0;
+  let currentRound = 8;
 
   for (const char of word) {
     freqMap[char]++ || (freqMap[char] = 1);
@@ -18,13 +17,9 @@ var minimumPushes = function (word) {
   }
 
   while (maxPQ.size() > 0) {
-    totalPushes += maxPQ.dequeue().priority * rounds;
+    totalPushes += maxPQ.dequeue().priority * Math.floor(currentRound / 8);
 
     currentRound++;
-    if (currentRound === 8) {
-      rounds++;
-      currentRound = 0;
-    }
   }
 
   return totalPushes;
