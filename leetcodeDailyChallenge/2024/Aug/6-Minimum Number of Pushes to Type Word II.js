@@ -4,7 +4,7 @@
  */
 var minimumPushes = function (word) {
   const freqMap = {};
-  let maxPQ = new MaxPriorityQueue();
+  const maxPQ = new MaxPriorityQueue();
   let totalPushes = 0;
   let currentRound = 8;
 
