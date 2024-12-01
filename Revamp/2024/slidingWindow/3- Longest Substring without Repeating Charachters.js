@@ -12,13 +12,12 @@ var lengthOfLongestSubstring = function (s) {
     const char = s[right];
 
     while (charSet.has(char)) {
-      charSet.delete(s[left]);
-      left++;
+      charSet.delete(s[left++]);
     }
 
     longestSubstring = Math.max(longestSubstring, right - left + 1);
-
     charSet.add(char);
+
     right++;
   }
 
