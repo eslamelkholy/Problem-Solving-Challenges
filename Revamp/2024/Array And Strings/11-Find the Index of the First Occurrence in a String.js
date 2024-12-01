@@ -44,3 +44,25 @@ var strStr = function (haystack, needle) {
 
   return -1;
 };
+
+/**
+ * @param {string} haystack
+ * @param {string} needle
+ * @return {number}
+ */
+var strStr = function (haystack, needle) {
+  let right = 0;
+
+  while (right < haystack.length) {
+    const currentChar = haystack[right];
+
+    if (currentChar === needle[0]) {
+      const slicedStr = haystack.slice(right, right + needle.length);
+      if (slicedStr === needle) return right;
+    }
+
+    right++;
+  }
+
+  return -1;
+};
