@@ -1,4 +1,4 @@
-const { MinPriorityQueue } = require("@datastructures-js/priority-queue");
+const { MinPriorityQueue } = require('@datastructures-js/priority-queue');
 // TODO: Time limit exceed solution
 
 // /**
