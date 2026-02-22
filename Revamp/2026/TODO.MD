@@ -17,3 +17,4 @@
 - Find K Pairs with Smallest Sums
 - Shortest path in binary matrix
 - Unique paths
+- Max Area of Island
